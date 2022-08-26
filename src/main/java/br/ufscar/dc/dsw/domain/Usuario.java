@@ -1,63 +1,73 @@
 package br.ufscar.dc.dsw.domain;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import br.ufscar.dc.dsw.validation.UniqueCPF;
+
 
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Usuario")
 public class Usuario extends AbstractEntity<Long> {
-  
-	@NotBlank
-    @Column(nullable = false, length = 20, unique = true)
-    private String username;
-    
-	@NotBlank
-    @Column(nullable = false, length = 64)
-    private String password;
-       
+
     @NotBlank
-    @Column(nullable = false, length = 60)
-    private String name;
+	@Size(min = 3, max = 256)
+    @Column(nullable = false, length = 256)
+    private String nome;
+	
+	@NotBlank
+	@Size(max = 256)
+    @Column(nullable = false, length = 256, unique = true)
+    private String email;
     
+	@UniqueCPF(message = "{Unique.usuario.CPF}")
     @NotBlank
-    @Column(nullable = false, length = 14)
+	@Size(min = 11, max = 11, message = "{Size.usuario.CPF}")
+    @Column(nullable = false, length = 11, unique = true)
     private String CPF;
+    
+	@NotBlank
+	@Size(min = 3, max = 64)
+    @Column(nullable = false, length = 64)
+    private String senha;
+    
+	@Size(max = 1)
+	@Column(nullable = true, length = 1)
+	private String sexo;
+
+	@Column(nullable = true)
+	private Date nascimento;
+
+	@Size(max = 11)
+	@Column(nullable = true)
+	private String telefone;
     
     @NotBlank
     @Column(nullable = false, length = 10)
-    private String role;
-    
-    @Column(nullable = false)
-    private boolean enabled;
-		
-	public String getUsername() {
-		return username;
+    private String papel;
+
+	public String getNome() {
+		return nome;
 	}
-	
-	public void setUsername(String username) {
-		this.username = username;
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-	
-	public String getPassword() {
-		return password;
+
+	public String getEmail() {
+		return email;
 	}
-	
-	public void setPassword(String password) {
-		this.password = password;
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
-	public String getName() {
-		return name;
-	}
-	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	
+
 	public String getCPF() {
 		return CPF;
 	}
@@ -66,19 +76,44 @@ public class Usuario extends AbstractEntity<Long> {
 		CPF = cPF;
 	}
 
-	public String getRole() {
-		return role;
+	public String getSenha() {
+		return senha;
 	}
-	
-	public void setRole(String role) {
-		this.role = role;
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
-	
-	public boolean isEnabled() {
-		return enabled;
+
+	public String getSexo() {
+		return sexo;
 	}
-	
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
+
+	public Date getNascimento() {
+		return nascimento;
+	}
+
+	public void setNascimento(Date nascimento) {
+		this.nascimento = nascimento;
+	}
+
+	public String getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+
+	public String getPapel() {
+		return papel;
+	}
+
+	public void setPapel(String papel) {
+		this.papel = papel;
+	}
+    		
 }

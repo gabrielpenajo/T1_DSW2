@@ -18,7 +18,7 @@ public class Editora extends AbstractEntity<Long> {
 
 	@UniqueCNPJ (message = "{Unique.editora.CNPJ}")
 	@NotBlank
-	@Size(min = 18, max = 18, message = "{Size.editora.CNPJ}")
+	@Size(min = 14, max = 14, message = "{Size.editora.CNPJ}")
 	@Column(nullable = false, unique = true, length = 60)
 	private String CNPJ;
 	

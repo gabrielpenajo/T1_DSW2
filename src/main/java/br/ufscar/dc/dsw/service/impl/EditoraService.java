@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.ufscar.dc.dsw.dao.IEditoraDAO;
+import br.ufscar.dc.dsw.dao.IAgenciaDAO;
 import br.ufscar.dc.dsw.domain.Editora;
 import br.ufscar.dc.dsw.service.spec.IEditoraService;
 
@@ -15,7 +15,7 @@ import br.ufscar.dc.dsw.service.spec.IEditoraService;
 public class EditoraService implements IEditoraService {
 
 	@Autowired
-	IEditoraDAO dao;
+	IAgenciaDAO dao;
 	
 	public void salvar(Editora editora) {
 		dao.save(editora);
