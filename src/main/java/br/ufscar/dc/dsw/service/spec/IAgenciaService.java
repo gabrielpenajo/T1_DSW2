@@ -13,4 +13,6 @@ public interface IAgenciaService {
 	void salvar(Agencia agencia);
 
 	void excluir(Long id);	
+
+	public boolean agenciaTemPacotes(Long id);
 }

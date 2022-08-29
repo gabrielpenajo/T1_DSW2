@@ -34,4 +34,9 @@ public class AgenciaService implements IAgenciaService {
 	public List<Agencia> buscarTodos() {
 		return dao.findAll();
 	}
+
+	@Transactional(readOnly = true)
+	public boolean agenciaTemPacotes(Long id) {
+		return !dao.findById(id.longValue()).getPacotes().isEmpty(); 
+	}
 }
