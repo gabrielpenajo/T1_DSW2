@@ -9,13 +9,14 @@ import br.ufscar.dc.dsw.domain.Agencia;
 @SuppressWarnings("unchecked")
 public interface IAgenciaDAO extends CrudRepository<Agencia, Long>{
 
+	Agencia save(Agencia agencia);
 	Agencia findById(long id);
-	
-	Agencia findByCNPJ (String CNPJ);
-
+	Agencia findByCNPJ(String CNPJ);
+	Agencia findByEmail(String email);
+	void deleteById(Long id);
 	List<Agencia> findAll();
 	
-	Agencia save(Agencia agencia);
 
-	void deleteById(Long id);
+	
+
 }
