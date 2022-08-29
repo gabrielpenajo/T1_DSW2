@@ -58,7 +58,7 @@ public class TurismoMvcApplication {
 			p1.setEstado("estado");
 			p1.setPais("pais");
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-			Date dataPartida = formatter.parse("20/11/2015")
+			Date dataPartida = formatter.parse("20/11/2015");
 			p1.setDataPartida(dataPartida);
 			p1.setDuracaoDias((long) 2);
 			p1.setValor(BigDecimal.valueOf(54.9));
