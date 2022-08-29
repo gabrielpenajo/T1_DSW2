@@ -44,9 +44,9 @@ public class UsuarioController {
 			return "usuario/cadastro";
 		}
 
-		System.out.println("password = " + usuario.getPassword());
+		System.out.println("password = " + usuario.getSenha());
 		
-		usuario.setPassword(encoder.encode(usuario.getPassword()));
+		usuario.setSenha(encoder.encode(usuario.getSenha()));
 		service.salvar(usuario);
 		attr.addFlashAttribute("sucess", "usuario.create.sucess");
 		return "redirect:/usuarios/listar";
@@ -65,7 +65,7 @@ public class UsuarioController {
 			return "usuario/cadastro";
 		}
 
-		System.out.println(usuario.getPassword());
+		System.out.println(usuario.getSenha());
 		
 		service.salvar(usuario);
 		attr.addFlashAttribute("sucess", "usuario.edit.sucess");
