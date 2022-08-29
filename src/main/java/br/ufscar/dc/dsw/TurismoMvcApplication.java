@@ -18,14 +18,14 @@ import br.ufscar.dc.dsw.domain.Pacote;
 import br.ufscar.dc.dsw.domain.Usuario;
 
 @SpringBootApplication
-public class LivrariaMvcApplication {
+public class TurismoMvcApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LivrariaMvcApplication.class, args);
+		SpringApplication.run(TurismoMvcApplication.class, args);
 	}
 
 	@Bean
-	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, BCryptPasswordEncoder encoder, IEditoraDAO editoraDAO, ILivroDAO livroDAO) {
+	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, IAgenciaDAO agenciaDAO, IPacoteDAO pacoteDAO) {
 		return (args) -> {
 			
 			Usuario u1 = new Usuario();
