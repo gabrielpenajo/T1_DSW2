@@ -15,7 +15,7 @@ public interface IAgenciaDAO extends CrudRepository<Agencia, Long>{
 
 	List<Agencia> findAll();
 	
-	Agencia save(Agencia editora);
+	Agencia save(Agencia agencia);
 
 	void deleteById(Long id);
 }
