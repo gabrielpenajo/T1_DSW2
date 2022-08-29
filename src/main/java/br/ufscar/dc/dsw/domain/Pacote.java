@@ -2,14 +2,13 @@ package br.ufscar.dc.dsw.domain;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -18,55 +17,46 @@ import javax.validation.constraints.Size;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Pacote")
-public class Pacote {
+public class Pacote extends AbstractEntity<Long> {
     
-    @Id 
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long id;
-
     @NotNull(message = "{NotNull.pacote.agencia}")
 	@ManyToOne
 	@JoinColumn(name = "agencia_id")
 	private Agencia agencia;
 
-    @NotBlank
+    @NotBlank(message = "{NotBlank.pacote.cidade}")
     @Size(max = 256)
     @Column(nullable = false, length = 256)
     private String cidade;
 
-    @NotBlank
+    @NotBlank(message = "{NotBlank.pacote.estado}")
     @Size(max = 256)
     @Column(nullable = false, length = 256)
     private String estado;
 
-    @NotBlank
+    @NotBlank(message = "{NotBlank.pacote.pais}")
     @Size(max = 256)
     @Column(nullable = false, length = 256)
     private String pais;
 
-    @NotBlank
+    @NotNull(message = "{NotNull.pacote.dataPartida}")
     @Column(nullable = false)
 	private Date dataPartida;
 
-    @NotBlank
+    @NotNull(message = "{NotNull.pacote.duracaoDias}")
     @Column(nullable = false)
 	private Long duracaoDias;
 
-    @NotBlank
-    @Column(nullable = false)
+    @NotNull(message = "{NotNull.pacote.valor}")
+    @Column(nullable = false, columnDefinition = "DECIMAL(8,2) DEFAULT 0.0")
 	private BigDecimal valor;
 
     @Size(max = 256)
     @Column(nullable = true, length = 256)
     private String descricao;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
+    @OneToMany(mappedBy = "pacote")
+    private List<Proposta> propostas;
 
     public Agencia getAgencia() {
         return agencia;
@@ -130,6 +120,14 @@ public class Pacote {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public List<Proposta> getPropostas() {
+        return propostas;
+    }
+
+    public void setPropostas(List<Proposta> propostas) {
+        this.propostas = propostas;
     }
 
     

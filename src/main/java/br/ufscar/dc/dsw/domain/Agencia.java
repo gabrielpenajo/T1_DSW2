@@ -18,22 +18,22 @@ import br.ufscar.dc.dsw.validation.UniqueCNPJ;
 public class Agencia extends AbstractEntity<Long> {
     
     @UniqueCNPJ (message = "{Unique.agencia.CNPJ}")
-	@NotBlank
+	@NotBlank(message = "{NotBlank.agencia.CNPJ}")
 	@Size(min = 14, max = 14, message = "{Size.agencia.CNPJ}")
 	@Column(nullable = false, unique = true, length = 60)
 	private String CNPJ;
 
-    @NotBlank
+    @NotBlank(message = "{NotBlank.agencia.nome}")
     @Size(max = 256)
     @Column(nullable = false, length = 256)
     private String nome;
 
-    @NotBlank
+    @NotBlank(message = "{NotBlank.agencia.email}")
     @Size(max = 256)
     @Column(nullable = false, length = 256, unique = true)
     private String email;
 
-    @NotBlank
+    @NotBlank(message = "{NotBlank.agencia.senha}")
     @Size(min = 3, max = 64)
     @Column(nullable = false, length = 64)
     private String senha;
@@ -84,4 +84,14 @@ public class Agencia extends AbstractEntity<Long> {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+    public List<Pacote> getPacotes() {
+        return pacotes;
+    }
+
+    public void setPacotes(List<Pacote> pacotes) {
+        this.pacotes = pacotes;
+    }
+
+    
 }
