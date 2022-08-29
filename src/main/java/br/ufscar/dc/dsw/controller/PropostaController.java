@@ -1,7 +1,9 @@
 package br.ufscar.dc.dsw.controller;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -17,29 +19,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.ufscar.dc.dsw.domain.Compra;
-import br.ufscar.dc.dsw.domain.Livro;
+import br.ufscar.dc.dsw.domain.Proposta;
+import br.ufscar.dc.dsw.domain.Pacote;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
-import br.ufscar.dc.dsw.service.spec.ICompraService;
-import br.ufscar.dc.dsw.service.spec.ILivroService;
+import br.ufscar.dc.dsw.service.spec.IPropostaService;
+import br.ufscar.dc.dsw.service.spec.IPacoteService;
 
 @Controller
-@RequestMapping("/compras")
-public class CompraController {
+@RequestMapping("/propostas")
+public class PropostaController {
 	
 	@Autowired
-	private ICompraService service;
+	private IPropostaService service;
 	
 	@Autowired
-	private ILivroService livroService;
+	private IPacoteService livroService;
 	
 	@GetMapping("/cadastrar")
-	public String cadastrar(Compra compra) {
-		String data = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
-		compra.setUsuario(this.getUsuario());
-		compra.setData(data);
-		return "compra/cadastro";
+	public String cadastrar(Proposta proposta) throws ParseException {
+		String dataString = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
+		proposta.setUsuario(this.getUsuario());
+
+		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		Date data = formato.parse(dataString);
+		proposta.setDataProposta(data);
+		return "proposta/cadastro";
 	}
 	
 	private Usuario getUsuario() {
@@ -50,25 +55,25 @@ public class CompraController {
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 					
-		model.addAttribute("compras",service.buscarTodosPorUsuario(this.getUsuario()));
+		model.addAttribute("propostas",service.buscarTodosPorUsuario(this.getUsuario()));
 		
-		return "compra/lista";
+		return "proposta/lista";
 	}
 	
 	@PostMapping("/salvar")
-	public String salvar(@Valid Compra compra, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid Proposta proposta, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "compra/cadastro";
+			return "proposta/cadastro";
 		}
 		
-		service.salvar(compra);
-		attr.addFlashAttribute("sucess", "Compra inserida com sucesso.");
-		return "redirect:/compras/listar";
+		service.salvar(proposta);
+		attr.addFlashAttribute("sucess", "Proposta inserida com sucesso.");
+		return "redirect:/propostas/listar";
 	}
 	
 	@ModelAttribute("livros")
-	public List<Livro> listaLivros() {
+	public List<Pacote> listaPacotes() {
 		return livroService.buscarTodos();
 	}
 }

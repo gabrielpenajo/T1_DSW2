@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.IPropostaDAO;
 import br.ufscar.dc.dsw.domain.Proposta;
+import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.service.spec.IPropostaService;
 
 @Service
@@ -33,5 +34,10 @@ public class PropostaService implements IPropostaService {
 	@Transactional(readOnly = true)
 	public List<Proposta> buscarTodos() {
 		return dao.findAll();
+	}
+
+	@Transactional(readOnly = true)
+	public List<Proposta> buscarTodosPorUsuario(Usuario u) {
+		return dao.findAllByUsuario(u);
 	}
 }
