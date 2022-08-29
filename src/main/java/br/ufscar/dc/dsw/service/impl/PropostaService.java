@@ -6,19 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.ufscar.dc.dsw.dao.IAgenciaDAO;
-import br.ufscar.dc.dsw.domain.Editora;
-import br.ufscar.dc.dsw.service.spec.IEditoraService;
+import br.ufscar.dc.dsw.dao.IPropostaDAO;
+import br.ufscar.dc.dsw.domain.Proposta;
+import br.ufscar.dc.dsw.service.spec.IPropostaService;
 
 @Service
 @Transactional(readOnly = false)
-public class EditoraService implements IEditoraService {
+public class PropostaService implements IPropostaService {
 
 	@Autowired
-	IAgenciaDAO dao;
-	
-	public void salvar(Editora editora) {
-		dao.save(editora);
+	IPropostaDAO dao;
+
+	public void salvar(Proposta proposta) {
+		dao.save(proposta);
 	}
 
 	public void excluir(Long id) {
@@ -26,17 +26,12 @@ public class EditoraService implements IEditoraService {
 	}
 
 	@Transactional(readOnly = true)
-	public Editora buscarPorId(Long id) {
+	public Proposta buscarPorId(Long id) {
 		return dao.findById(id.longValue());
 	}
 
 	@Transactional(readOnly = true)
-	public List<Editora> buscarTodos() {
+	public List<Proposta> buscarTodos() {
 		return dao.findAll();
-	}
-	
-	@Transactional(readOnly = true)
-	public boolean editoraTemLivros(Long id) {
-		return !dao.findById(id.longValue()).getLivros().isEmpty(); 
 	}
 }
