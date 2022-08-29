@@ -14,6 +14,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Pacote")
@@ -41,6 +43,7 @@ public class Pacote extends AbstractEntity<Long> {
 
     @NotNull(message = "{NotNull.pacote.dataPartida}")
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dataPartida;
 
     @NotNull(message = "{NotNull.pacote.duracaoDias}")

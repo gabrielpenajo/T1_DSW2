@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Proposta")
@@ -27,6 +29,7 @@ public class Proposta extends AbstractEntity<Long> {
 
     @NotNull(message = "{NotNull.proposta.dataProposta}")
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataProposta;
 
     @NotNull(message = "{NotNull.proposta.valor}")

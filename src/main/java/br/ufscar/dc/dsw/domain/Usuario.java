@@ -10,6 +10,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import br.ufscar.dc.dsw.validation.UniqueCPF;
 
 
@@ -44,6 +46,7 @@ public class Usuario extends AbstractEntity<Long> {
 	private String sexo;
 
 	@Column(nullable = true)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date nascimento;
 
 	@Size(max = 11)
