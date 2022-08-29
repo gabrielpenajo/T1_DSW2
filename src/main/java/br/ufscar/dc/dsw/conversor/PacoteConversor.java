@@ -4,17 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import br.ufscar.dc.dsw.domain.Livro;
-import br.ufscar.dc.dsw.service.spec.ILivroService;
+import br.ufscar.dc.dsw.domain.Pacote;
+import br.ufscar.dc.dsw.service.spec.IPacoteService;
 
 @Component
-public class LivroConversor implements Converter<String, Livro>{
+public class PacoteConversor implements Converter<String, Pacote>{
 
 	@Autowired
-	private ILivroService service;
+	private IPacoteService service;
 	
 	@Override
-	public Livro convert(String text) {
+	public Pacote convert(String text) {
 		
 		if (text.isEmpty()) {
 		 return null;	
