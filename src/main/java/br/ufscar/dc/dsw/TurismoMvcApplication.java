@@ -27,8 +27,12 @@ public class TurismoMvcApplication {
 	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, IAgenciaDAO agenciaDAO, IPacoteDAO pacoteDAO) {
 		return (args) -> {
 			
+			usuarioDAO.deleteAll();
+			agenciaDAO.deleteAll();
+			pacoteDAO.deleteAll();
+
 			Usuario u1 = new Usuario();
-			u1.setEmail("admin@admin.com");
+			u1.setEmail("admin@email.com");
 			u1.setSenha("admin");
 			u1.setCPF("01234567890");
 			u1.setNome("Administrador");
@@ -42,15 +46,15 @@ public class TurismoMvcApplication {
 			u2.setNome("Beltrano Andrade");
 			u2.setPapel("user");
 			usuarioDAO.save(u2);
-			
+
 			Agencia a1 = new Agencia();
 			a1.setEmail("fulano@email.com");
 			a1.setSenha("123");
 			a1.setCNPJ("01234567890123");
 			a1.setNome("Fulano Silva");
 			agenciaDAO.save(a1);
-			
-			
+
+
 			Pacote p1 = new Pacote();
 			p1.setAgencia(a1);
 			p1.setCidade("Cidade1");
@@ -62,6 +66,9 @@ public class TurismoMvcApplication {
 			p1.setDuracaoDias((long) 2);
 			p1.setValor(BigDecimal.valueOf(54.9));
 			pacoteDAO.save(p1);
+
+			for (Usuario u : usuarioDAO.findAll())
+				System.out.println(u.getEmail().toString() + " " + u.getSenha());
 		};
 	}
 }

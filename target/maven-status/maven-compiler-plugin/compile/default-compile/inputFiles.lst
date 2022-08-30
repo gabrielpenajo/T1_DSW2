@@ -1,32 +1,34 @@
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/validation/UniqueCNPJ.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/config/WebSecurityConfig.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/domain/Usuario.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/dao/IUsuarioDAO.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/controller/CompraController.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/validation/UniqueCNPJValidator.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/impl/EditoraService.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/domain/Livro.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/dao/ILivroDAO.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/security/UsuarioDetails.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/spec/IUsuarioService.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/controller/EditoraController.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/conversor/LivroConversor.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/impl/LivroService.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/config/MvcConfig.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/conversor/BigDecimalConversor.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/spec/ICompraService.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/domain/Editora.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/domain/Compra.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/security/UsuarioDetailsServiceImpl.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/dao/IEditoraDAO.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/impl/UsuarioService.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/domain/AbstractEntity.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/LivrariaMvcApplication.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/impl/CompraService.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/controller/UsuarioController.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/dao/ICompraDAO.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/controller/ErrorViewController.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/spec/ILivroService.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/conversor/EditoraConversor.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/controller/LivroController.java
-/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/spec/IEditoraService.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\validation\UniqueCPFValidator.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\controller\PacoteController.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\conversor\AgenciaConversor.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\validation\UniqueCNPJValidator.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\conversor\PacoteConversor.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\security\UsuarioDetailsServiceImpl.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\domain\Usuario.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\service\impl\UsuarioService.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\validation\UniqueCPF.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\dao\IPropostaDAO.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\controller\ErrorViewController.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\validation\UniqueCNPJ.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\domain\Agencia.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\security\UsuarioDetails.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\dao\IUsuarioDAO.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\controller\AgenciaController.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\dao\IAgenciaDAO.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\service\spec\IAgenciaService.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\TurismoMvcApplication.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\domain\Pacote.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\service\spec\IUsuarioService.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\domain\AbstractEntity.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\service\impl\PropostaService.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\config\WebSecurityConfig.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\service\impl\PacoteService.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\conversor\BigDecimalConversor.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\domain\Proposta.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\service\impl\AgenciaService.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\config\MvcConfig.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\controller\PropostaController.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\controller\UsuarioController.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\service\spec\IPacoteService.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\service\spec\IPropostaService.java
+C:\Users\T-GAMER\OneDrive\햞ea de Trabalho\rotes\src\main\java\br\ufscar\dc\dsw\dao\IPacoteDAO.java

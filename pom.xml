@@ -131,6 +131,7 @@
 				<version>1.0-beta-1</version>
 				<executions>
 					<execution>
+						<?m2e execute onConfiguration,onIncremental?>
 						<id>native2ascii-utf8-resources</id>
 						<goals>
 							<goal>native2ascii</goal>
