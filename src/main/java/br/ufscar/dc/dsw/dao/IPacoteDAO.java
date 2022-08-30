@@ -16,7 +16,9 @@ public interface IPacoteDAO extends CrudRepository<Pacote, Long>{
 	void deleteById(Long id);
 	List<Pacote> findAll();
 	List<Pacote> findByAgencia(Agencia a);
-	List<Pacote> findByDestino(String destino);
+	List<Pacote> findByCidade(String cidade);
+	List<Pacote> findByEstado(String estado);
+	List<Pacote> findByPais(String pais);
 	List<Pacote> findByDataPartida(Date data);
 	// Fazer os filtros no service e validar pacotes ainda ativos no service tb.
 	// Pacotes ativos sao aqueles que o voo nao partiu ainda.
