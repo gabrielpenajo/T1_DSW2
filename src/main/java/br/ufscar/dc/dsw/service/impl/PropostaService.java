@@ -7,10 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.IPropostaDAO;
-import br.ufscar.dc.dsw.domain.Cliente;
-import br.ufscar.dc.dsw.domain.Pacote;
 import br.ufscar.dc.dsw.domain.Proposta;
-import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.service.spec.IPropostaService;
 
 @Service
