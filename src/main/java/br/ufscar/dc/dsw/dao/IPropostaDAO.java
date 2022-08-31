@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import br.ufscar.dc.dsw.domain.Pacote;
 import br.ufscar.dc.dsw.domain.Proposta;
-import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.domain.Cliente;
 
 @SuppressWarnings("unchecked")
 public interface IPropostaDAO extends CrudRepository<Proposta, Long>{
@@ -15,7 +15,7 @@ public interface IPropostaDAO extends CrudRepository<Proposta, Long>{
 	Proposta findById(long id);
 	void deleteById(Long id);
 	List<Proposta> findAll();
-	List<Proposta> findAllByUsuario(Usuario u); // Fazer o service para separar em propostas ativas e nao ativas
+	List<Proposta> findAllByCliente(Cliente c); // Fazer o service para separar em propostas ativas e nao ativas
 	List<Proposta> findAllByPacote(Pacote p);
 
 }
