@@ -11,6 +11,7 @@
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/spec/IAgenciaService.java
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/conversor/PacoteConversor.java
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/security/UsuarioDetails.java
+/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/dao/IClienteDAO.java
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/spec/IUsuarioService.java
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/spec/IPacoteService.java
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/validation/UniqueCPF.java
@@ -22,6 +23,7 @@
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/security/UsuarioDetailsServiceImpl.java
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/controller/PacoteController.java
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/domain/Agencia.java
+/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/impl/ClienteService.java
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/impl/AgenciaService.java
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/impl/UsuarioService.java
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/domain/Proposta.java
@@ -32,3 +34,5 @@
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/controller/AgenciaController.java
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/controller/ErrorViewController.java
 /home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/domain/Pacote.java
+/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/service/spec/IClienteService.java
+/home/user/Documents/DSW/trabalho_pratico2/T2_DSW1/src/main/java/br/ufscar/dc/dsw/domain/Cliente.java
