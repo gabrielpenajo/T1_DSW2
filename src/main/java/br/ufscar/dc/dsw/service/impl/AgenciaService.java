@@ -39,4 +39,15 @@ public class AgenciaService implements IAgenciaService {
 	public boolean agenciaTemPacotes(Long id) {
 		return !dao.findById(id.longValue()).getPacotes().isEmpty(); 
 	}
+
+	@Override
+	public Agencia buscarPorCNPJ(String CNPJ) {
+		return dao.findByCNPJ(CNPJ);
+	}
+
+	@Override
+	public Agencia buscarPorEmail(String email) {
+		return dao.findByEmail(email);
+	}
+	
 }

@@ -8,6 +8,10 @@ public interface IAgenciaService {
 
 	Agencia buscarPorId(Long id);
 
+	Agencia buscarPorCNPJ(String CNPJ);
+
+	Agencia buscarPorEmail(String email);
+
 	List<Agencia> buscarTodos();
 
 	void salvar(Agencia agencia);

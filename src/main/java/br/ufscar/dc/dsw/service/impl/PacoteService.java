@@ -1,5 +1,6 @@
 package br.ufscar.dc.dsw.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.IPacoteDAO;
+import br.ufscar.dc.dsw.domain.Agencia;
 import br.ufscar.dc.dsw.domain.Pacote;
 import br.ufscar.dc.dsw.service.spec.IPacoteService;
 
@@ -33,5 +35,30 @@ public class PacoteService implements IPacoteService {
 	@Transactional(readOnly = true)
 	public List<Pacote> buscarTodos() {
 		return dao.findAll();
+	}
+
+	@Override
+	public List<Pacote> buscarPorAgencia(Agencia a) {
+		return dao.findByAgencia(a);
+	}
+
+	@Override
+	public List<Pacote> buscarPorCidade(String cidade) {
+		return dao.findByCidade(cidade);
+	}
+
+	@Override
+	public List<Pacote> buscarPorEstado(String estado) {
+		return dao.findByEstado(estado);
+	}
+
+	@Override
+	public List<Pacote> buscarPorPais(String pais) {
+		return dao.findByPais(pais);
+	}
+
+	@Override
+	public List<Pacote> BuscarPorDataPartida(Date data) {
+		return dao.findByDataPartida(data);
 	}
 }
