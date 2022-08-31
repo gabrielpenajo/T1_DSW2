@@ -19,8 +19,8 @@ public class Proposta extends AbstractEntity<Long> {
 
     @NotNull(message = "{NotNull.proposta.usuario}")
 	@ManyToOne
-	@JoinColumn(name = "usuario_id")
-	private Usuario usuario;
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
 
     @NotNull(message = "{NotNull.proposta.pacote}")
     @ManyToOne
@@ -40,12 +40,12 @@ public class Proposta extends AbstractEntity<Long> {
     @Column(nullable = false)
     private int statusProposta;
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Pacote getPacote() {
@@ -79,7 +79,11 @@ public class Proposta extends AbstractEntity<Long> {
     public void setStatusProposta(int statusProposta) {
         this.statusProposta = statusProposta;
     }
-    
-    
 
+    @Override
+    public String toString() {
+        return "Proposta [cliente=" + cliente + ", dataProposta=" + dataProposta + ", pacote=" + pacote
+                + ", statusProposta=" + statusProposta + ", valor=" + valor + "]";
+    }
+    
 }

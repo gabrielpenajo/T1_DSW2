@@ -1,18 +1,11 @@
 package br.ufscar.dc.dsw.domain;
 
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import br.ufscar.dc.dsw.validation.UniqueCPF;
 
 
 @SuppressWarnings("serial")
@@ -30,35 +23,14 @@ public class Usuario extends AbstractEntity<Long> {
     @Column(nullable = false, length = 256, unique = true)
     private String email;
     
-	@UniqueCPF(message = "{Unique.usuario.CPF}")
-    @NotBlank(message = "{NotBlank.usuario.CPF}")
-	@Size(min = 11, max = 11, message = "{Size.usuario.CPF}")
-    @Column(nullable = false, length = 11, unique = true)
-    private String CPF;
-    
 	@NotBlank(message = "{NotBlank.usuario.senha}")
 	@Size(min = 3, max = 64)
     @Column(nullable = false, length = 64)
     private String senha;
-    
-	@Size(max = 1)
-	@Column(nullable = true, length = 1)
-	private String sexo;
 
-	@Column(nullable = true)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date nascimento;
-
-	@Size(max = 11)
-	@Column(nullable = true)
-	private String telefone;
-    
     @NotBlank(message = "{NotBlank.usuario.papel}")
     @Column(nullable = false, length = 10)
     private String papel;
-
-	@OneToMany(mappedBy = "usuario")
-	private List<Proposta> propostas; 
 
 	public String getNome() {
 		return nome;
@@ -76,44 +48,12 @@ public class Usuario extends AbstractEntity<Long> {
 		this.email = email;
 	}
 
-	public String getCPF() {
-		return CPF;
-	}
-
-	public void setCPF(String cPF) {
-		CPF = cPF;
-	}
-
 	public String getSenha() {
 		return senha;
 	}
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-
-	public Date getNascimento() {
-		return nascimento;
-	}
-
-	public void setNascimento(Date nascimento) {
-		this.nascimento = nascimento;
-	}
-
-	public String getTelefone() {
-		return telefone;
-	}
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
 	}
 
 	public String getPapel() {
@@ -124,12 +64,9 @@ public class Usuario extends AbstractEntity<Long> {
 		this.papel = papel;
 	}
 
-	public List<Proposta> getPropostas() {
-		return propostas;
+	@Override
+	public String toString() {
+		return "Usuario [email=" + email + ", nome=" + nome + ", papel=" + papel + ", senha=" + senha + "]";
 	}
-
-	public void setPropostas(List<Proposta> propostas) {
-		this.propostas = propostas;
-	}
-    		
+ 		
 }

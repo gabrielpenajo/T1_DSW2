@@ -93,5 +93,10 @@ public class Agencia extends AbstractEntity<Long> {
         this.pacotes = pacotes;
     }
 
+    @Override
+    public String toString() {
+        return "Agencia [CNPJ=" + CNPJ + ", descricao=" + descricao + ", email=" + email + ", nome=" + nome
+                + ", pacotes=" + pacotes + ", senha=" + senha + "]";
+    }
     
 }
