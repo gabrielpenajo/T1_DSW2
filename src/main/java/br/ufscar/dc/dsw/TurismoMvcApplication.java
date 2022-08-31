@@ -4,10 +4,12 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;  
 import java.util.Date;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.ufscar.dc.dsw.dao.IAgenciaDAO;
 import br.ufscar.dc.dsw.dao.IPacoteDAO;
@@ -18,6 +20,9 @@ import br.ufscar.dc.dsw.domain.Usuario;
 
 @SpringBootApplication
 public class TurismoMvcApplication {
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	public static void main(String[] args) {
 		SpringApplication.run(TurismoMvcApplication.class, args);
@@ -33,7 +38,7 @@ public class TurismoMvcApplication {
 
 			Usuario u1 = new Usuario();
 			u1.setEmail("admin@email.com");
-			u1.setSenha("admin");
+			u1.setSenha(encoder.encode("admin"));
 			u1.setCPF("01234567890");
 			u1.setNome("Administrador");
 			u1.setPapel("admin");
