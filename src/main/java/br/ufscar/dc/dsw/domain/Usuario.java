@@ -2,6 +2,9 @@ package br.ufscar.dc.dsw.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
@@ -9,12 +12,15 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 
-
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Usuario")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Usuario extends AbstractEntity<Long> {
+public class Usuario {
+
+	@Id 
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private Long id;
 
     @NotBlank(message = "{NotBlank.usuario.nome}")
 	@Size(min = 3, max = 256)
@@ -67,9 +73,18 @@ public class Usuario extends AbstractEntity<Long> {
 		this.papel = papel;
 	}
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@Override
 	public String toString() {
-		return "Usuario [email=" + email + ", nome=" + nome + ", papel=" + papel + ", senha=" + senha + "]";
+		return "Usuario [email=" + email + ", id=" + id + ", nome=" + nome + ", papel=" + papel + ", senha=" + senha
+				+ "]";
 	}
  		
 }
