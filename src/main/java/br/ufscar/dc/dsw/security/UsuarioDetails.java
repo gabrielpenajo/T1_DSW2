@@ -17,7 +17,7 @@ public class UsuarioDetails implements UserDetails {
     public UsuarioDetails(Usuario usuario) {
         this.usuario = usuario;
     }
- 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + usuario.getPapel());

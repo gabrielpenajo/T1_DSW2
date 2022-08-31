@@ -32,10 +32,6 @@ public class TurismoMvcApplication {
 	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, IAgenciaDAO agenciaDAO, IPacoteDAO pacoteDAO) {
 		return (args) -> {
 			
-			usuarioDAO.deleteAll();
-			agenciaDAO.deleteAll();
-			pacoteDAO.deleteAll();
-
 			Usuario u1 = new Usuario();
 			u1.setEmail("admin@email.com");
 			u1.setSenha(encoder.encode("admin"));
@@ -46,10 +42,10 @@ public class TurismoMvcApplication {
 			
 			Usuario u2 = new Usuario();
 			u2.setEmail("beltrano@email.com");
-			u2.setSenha("123");
+			u2.setSenha(encoder.encode("123"));
 			u2.setCPF("98584961410");
 			u2.setNome("Beltrano Andrade");
-			u2.setPapel("user");
+			u2.setPapel("USER");
 			usuarioDAO.save(u2);
 
 			Agencia a1 = new Agencia();
