@@ -15,7 +15,7 @@ import br.ufscar.dc.dsw.validation.UniqueCNPJ;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Agencia")
-public class Agencia extends AbstractEntity<Long> {
+public class Agencia extends Usuario {
     
     @UniqueCNPJ (message = "{Unique.agencia.CNPJ}")
 	@NotBlank(message = "{NotBlank.agencia.CNPJ}")

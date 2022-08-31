@@ -12,9 +12,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import br.ufscar.dc.dsw.dao.IAgenciaDAO;
+import br.ufscar.dc.dsw.dao.IClienteDAO;
 import br.ufscar.dc.dsw.dao.IPacoteDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.domain.Agencia;
+import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Pacote;
 import br.ufscar.dc.dsw.domain.Usuario;
 
@@ -29,24 +31,24 @@ public class TurismoMvcApplication {
 	}
 
 	@Bean
-	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, IAgenciaDAO agenciaDAO, IPacoteDAO pacoteDAO) {
+	public CommandLineRunner demo(IUsuarioDAO usuarioDAO, IClienteDAO clienteDAO, IAgenciaDAO agenciaDAO, IPacoteDAO pacoteDAO) {
 		return (args) -> {
 			
-			Usuario u1 = new Usuario();
-			u1.setEmail("admin@email.com");
-			u1.setSenha(encoder.encode("admin"));
-			u1.setCPF("01234567890");
-			u1.setNome("Administrador");
-			u1.setPapel("ADMIN");
-			usuarioDAO.save(u1);
+			Cliente c1 = new Cliente();
+			c1.setEmail("admin@email.com");
+			c1.setSenha(encoder.encode("admin"));
+			c1.setCPF("01234567890");
+			c1.setNome("Administrador");
+			c1.setPapel("ADMIN");
+			clienteDAO.save(c1);
 			
-			Usuario u2 = new Usuario();
-			u2.setEmail("beltrano@email.com");
-			u2.setSenha(encoder.encode("123"));
-			u2.setCPF("98584961410");
-			u2.setNome("Beltrano Andrade");
-			u2.setPapel("USER");
-			usuarioDAO.save(u2);
+			Cliente c2 = new Cliente();
+			c2.setEmail("beltrano@email.com");
+			c2.setSenha(encoder.encode("123"));
+			c2.setCPF("98584961410");
+			c2.setNome("Beltrano Andrade");
+			c2.setPapel("USER");
+			clienteDAO.save(c2);
 
 			Agencia a1 = new Agencia();
 			a1.setEmail("fulano@email.com");

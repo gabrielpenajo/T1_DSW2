@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Proposta;
+import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Pacote;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.security.UsuarioDetails;
 import br.ufscar.dc.dsw.service.spec.IPropostaService;
+import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.service.spec.IPacoteService;
 
 @Controller
@@ -34,12 +36,16 @@ public class PropostaController {
 	private IPropostaService service;
 	
 	@Autowired
+	private IClienteService clientService;
+
+	@Autowired
 	private IPacoteService livroService;
 	
 	@GetMapping("/cadastrar")
 	public String cadastrar(Proposta proposta) throws ParseException {
 		String dataString = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(Calendar.getInstance().getTime());
-		proposta.setUsuario(this.getUsuario());
+		Cliente cliente = clientService.buscarPorId(this.getUsuario().getId());   
+		proposta.setCliente(cliente);
 
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date data = formato.parse(dataString);
@@ -55,7 +61,7 @@ public class PropostaController {
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 					
-		model.addAttribute("propostas",service.buscarTodosPorUsuario(this.getUsuario()));
+		model.addAttribute("propostas",service.buscarTodosPorCliente_Id(this.getUsuario().getId()));
 		
 		return "proposta/lista";
 	}

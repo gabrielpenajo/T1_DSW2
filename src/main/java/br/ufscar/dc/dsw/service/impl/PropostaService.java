@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.IPropostaDAO;
+import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.domain.Pacote;
 import br.ufscar.dc.dsw.domain.Proposta;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.service.spec.IPropostaService;
@@ -37,7 +39,20 @@ public class PropostaService implements IPropostaService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<Proposta> buscarTodosPorUsuario(Usuario u) {
-		return dao.findAllByUsuario(u);
+	public List<Proposta> buscarTodosPorCliente_Id(Long id) {
+		
+		return dao.findAllByCliente_Id(id);
 	}
+	
+	@Override
+	public List<Proposta> buscarTodosPorCliente_CPF(String CPF) {
+		return dao.findAllByCliente_CPF(CPF);
+	}
+
+	@Override
+	public List<Proposta> buscarTodosPorPacote_Id(Long id) {
+		return dao.findAllByPacote_Id(id);
+	}
+
+
 }

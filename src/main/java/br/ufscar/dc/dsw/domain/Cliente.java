@@ -17,7 +17,7 @@ import br.ufscar.dc.dsw.validation.UniqueCPF;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "Cliente")
-public class Cliente {
+public class Cliente extends Usuario {
 
     @UniqueCPF(message = "{Unique.usuario.CPF}")
     @NotBlank(message = "{NotBlank.usuario.CPF}")

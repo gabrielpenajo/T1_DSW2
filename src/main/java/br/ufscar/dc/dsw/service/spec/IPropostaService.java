@@ -3,7 +3,6 @@ package br.ufscar.dc.dsw.service.spec;
 import java.util.List;
 
 import br.ufscar.dc.dsw.domain.Proposta;
-import br.ufscar.dc.dsw.domain.Usuario;
 
 public interface IPropostaService {
 
@@ -15,5 +14,8 @@ public interface IPropostaService {
 
 	void excluir(Long id);
 
-	public List<Proposta> buscarTodosPorUsuario(Usuario u);
+	public List<Proposta> buscarTodosPorCliente_Id(Long id);
+	public List<Proposta> buscarTodosPorCliente_CPF(String CPF);
+	public List<Proposta> buscarTodosPorPacote_Id(Long id);
+	// servico para propostas validas
 }
