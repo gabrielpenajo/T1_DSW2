@@ -20,7 +20,7 @@ public interface IUsuarioDAO extends CrudRepository<Usuario, Long> {
 	List<Usuario> findAll();
 	void deleteById(Long id);
 	
-    @Query("SELECT u FROM Usuario u WHERE u.nome = :username")
+    @Query("SELECT u FROM Usuario u WHERE u.email = :username")
     public Usuario getUserByUsername(@Param("username") String username);
 
 }

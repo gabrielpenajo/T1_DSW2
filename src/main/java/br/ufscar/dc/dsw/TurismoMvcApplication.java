@@ -41,7 +41,7 @@ public class TurismoMvcApplication {
 			u1.setSenha(encoder.encode("admin"));
 			u1.setCPF("01234567890");
 			u1.setNome("Administrador");
-			u1.setPapel("admin");
+			u1.setPapel("ADMIN");
 			usuarioDAO.save(u1);
 			
 			Usuario u2 = new Usuario();
@@ -54,7 +54,7 @@ public class TurismoMvcApplication {
 
 			Agencia a1 = new Agencia();
 			a1.setEmail("fulano@email.com");
-			a1.setSenha("123");
+			a1.setSenha(encoder.encode("123"));
 			a1.setCNPJ("01234567890123");
 			a1.setNome("Fulano Silva");
 			agenciaDAO.save(a1);
