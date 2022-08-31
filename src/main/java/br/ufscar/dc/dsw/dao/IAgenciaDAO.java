@@ -18,7 +18,4 @@ public interface IAgenciaDAO extends CrudRepository<Agencia, Long>{
 	
 	// @Query("SELECT u FROM Agencia u WHERE u.email = :username")
     // public Agencia getAgencByUsername(@Param("username") String username);
-
-	
-
 }

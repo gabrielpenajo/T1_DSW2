@@ -34,29 +34,29 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th th:text="#{livro.titulo.label}"></th>
-									<th th:text="#{livro.autor.label}"></th>
-									<th th:text="#{livro.editora.label}"></th>
-									<th th:text="#{livro.ano.label}"></th>
-									<th th:text="#{livro.preco.label}"></th>
+									<th th:text="#{pacote.titulo.label}"></th>
+									<th th:text="#{pacote.autor.label}"></th>
+									<th th:text="#{pacote.agencia.label}"></th>
+									<th th:text="#{pacote.ano.label}"></th>
+									<th th:text="#{pacote.preco.label}"></th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each="livro : ${livros}">
+								<tr th:each="pacote : ${pacotes}">
 									<td>
-										<input type="radio" th:id="${livro.id}" name="livro" th:value="${livro.id}" th:field="*{livro}" required>
+										<input type="radio" th:id="${pacote.id}" name="pacote" th:value="${pacote.id}" th:field="*{pacote}" required>
 									</td>
-									<td th:text="${livro.titulo}"></td>
-									<td th:text="${livro.autor}"></td>
-									<td th:text="${livro.editora.nome}"></td>
-									<td th:text="${livro.ano}"></td>
-									<td th:text="|R$ ${#numbers.formatDecimal(livro.preco,2,2,'COMMA')}|"></td>
+									<td th:text="${pacote.titulo}"></td>
+									<td th:text="${pacote.autor}"></td>
+									<td th:text="${pacote.agencia.nome}"></td>
+									<td th:text="${pacote.ano}"></td>
+									<td th:text="|R$ ${#numbers.formatDecimal(pacote.preco,2,2,'COMMA')}|"></td>
 								</tr>
 							</tbody>
 						</table>
 
 						<div class="invalid-feedback">
-							<span th:errors="*{livro}"></span>
+							<span th:errors="*{pacote}"></span>
 						</div>
 					</div>
 				</div>

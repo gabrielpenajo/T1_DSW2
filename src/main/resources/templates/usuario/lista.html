@@ -30,8 +30,8 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th th:text="#{usuario.username.label}"></th>
-							<th th:text="#{usuario.name.label}"></th>
+							<th th:text="#{usuario.email.label}"></th>
+							<th th:text="#{usuario.nome.label}"></th>
 							<th th:text="#{usuario.CPF.label}"></th>
 							<th th:text="#{usuario.role.label}"></th>
 							<th th:text="#{acao.label}"></th>
@@ -40,10 +40,10 @@
 					<tbody>
 						<tr th:each="usuario : ${usuarios}">
 							<td th:text="${usuario.id}"></td>
-							<td th:text="${usuario.username}"></td>
-							<td th:text="${usuario.name}"></td>
-							<td th:text="${usuario.CPF}"></td>
-							<td th:text="${usuario.role}"></td>
+							<td th:text="${usuario.email}"></td>
+							<td th:text="${usuario.nome}"></td>
+							<td th:text="${usuario.papel == 'AGENCIA'? usuario.CNPJ : usuario.CPF}"></td>
+							<td th:text="${usuario.papel}"></td>
 							<td colspan="2">
 								<a class="btn btn-info btn-sm" th:href="@{/usuarios/editar/{id} (id=${usuario.id}) }"
 									role="button"> 

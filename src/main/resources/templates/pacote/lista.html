@@ -29,22 +29,20 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th th:text="#{pacote.titulo.label}"></th>
-							<th th:text="#{pacote.autor.label}"></th>
+							<th th:text="#{pacote.destino.label}"></th>
 							<th th:text="#{pacote.agencia.label}"></th>
-							<th th:text="#{pacote.ano.label}"></th>
-							<th th:text="#{pacote.preco.label}"></th>
+							<th th:text="#{pacote.dataPartida.label}"></th>
+							<th th:text="#{pacote.valor.label}"></th>
 							<th th:text="#{acao.label}"></th>
 						</tr>
 					</thead>
 					<tbody>						
 						<tr th:each="pacote : ${pacotes}">
 							<td th:text="${pacote.id}"></td>
-							<td th:text="${pacote.titulo}"></td>
-							<td th:text="${pacote.autor}"></td>
+							<td th:text="${pacote.getDestino()}"></td>
 							<td th:text="${pacote.agencia.nome}"></td>
-							<td th:text="${pacote.ano}"></td>
-							<td th:text="|R$ ${#numbers.formatDecimal(pacote.preco,2,2,'COMMA')}|"></td>
+							<td th:text="${pacote.dataPartida}"></td>
+							<td th:text="|R$ ${#numbers.formatDecimal(pacote.valor,2,2,'COMMA')}|"></td>
 							<td colspan="2">
 								<a class="btn btn-info btn-sm"
 									th:href="@{/pacotes/editar/{id} (id=${pacote.id}) }" role="button"> 

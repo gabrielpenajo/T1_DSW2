@@ -11,12 +11,12 @@
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active">
 						<i class="oi oi-caret-right"></i>
-						<span th:text="#{compra.listar.label}"></span>
+						<span th:text="#{proposta.listar.label}"></span>
 					</li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/compras/cadastrar}" role="button"> 
+				<a class="btn btn-primary btn-md" th:href="@{/propostas/cadastrar}" role="button"> 
 					<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
-					<span th:text="#{compra.cadastrar.label}"></span>
+					<span th:text="#{proposta.cadastrar.label}"></span>
 				</a>
 			</div>
 		</nav>
@@ -30,23 +30,21 @@
 					<thead>
 						<tr>
 							<th class="bg-warning">#</th>
-							<th class="bg-warning" th:text="#{compra.data.label}"></th>
-							<th class="bg-warning" th:text="#{livro.titulo.label}"></th>
-							<th class="bg-warning" th:text="#{livro.autor.label}"></th>
-							<th class="bg-warning" th:text="#{livro.editora.label}"></th>
-							<th class="bg-warning" th:text="#{livro.ano.label}"></th>
-							<th class="bg-warning" th:text="#{compra.valor.label}"></th>
+							<th class="bg-warning" th:text="#{proposta.data.label}"></th>
+							<th class="bg-warning" th:text="#{pacote.destino.label}"></th>
+							<th class="bg-warning" th:text="#{pacote.agencia.label}"></th>
+							<th class="bg-warning" th:text="#{pacote.ano.label}"></th>
+							<th class="bg-warning" th:text="#{proposta.valor.label}"></th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="compra : ${compras}">
-							<td th:text="${compra.id}"></td>
-							<td th:text="${compra.data}"></td>
-							<td th:text="${compra.livro.titulo}"></td>
-							<td th:text="${compra.livro.autor}"></td>
-							<td th:text="${compra.livro.editora.nome}"></td>
-							<td th:text="${compra.livro.ano}"></td>
-							<td th:text="|R$ ${#numbers.formatDecimal(compra.valor,2,2,'COMMA')}|"></td>
+						<tr th:each="proposta : ${propostas}">
+							<td th:text="${proposta.id}"></td>
+							<td th:text="${proposta.data}"></td>
+							<td th:text="${proposta.pacote.destino}"></td>
+							<td th:text="${proposta.pacote.agencia.nome}"></td>
+							<td th:text="${proposta.pacote.ano}"></td>
+							<td th:text="|R$ ${#numbers.formatDecimal(proposta.valor,2,2,'COMMA')}|"></td>
 						</tr>
 					</tbody>
 				</table>

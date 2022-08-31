@@ -133,5 +133,7 @@ public class Pacote extends AbstractEntity<Long> {
         this.propostas = propostas;
     }
 
-    
+    public String getDestino() {
+        return this.getCidade() + " - " + this.getEstado() + ", " + this.getPais();
+    }
 }

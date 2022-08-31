@@ -61,9 +61,9 @@ public class TurismoMvcApplication {
 
 			Pacote p1 = new Pacote();
 			p1.setAgencia(a1);
-			p1.setCidade("Cidade1");
-			p1.setEstado("estado");
-			p1.setPais("pais");
+			p1.setCidade("São Carlos");
+			p1.setEstado("São Paulo");
+			p1.setPais("São Paulo");
 			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 			Date dataPartida = formatter.parse("20/11/2015");
 			p1.setDataPartida(dataPartida);
