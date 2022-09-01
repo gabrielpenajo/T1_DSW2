@@ -1,98 +1,123 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}">
 <head>
-<meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
 </head>
 <body>
 
-	<section class="layout-content" layout:fragment="corpo">
+<section class="layout-content" layout:fragment="corpo">
 
-		<nav class="navbar navbar-expand-md bg-light">
-			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><i class="oi oi-caret-right"></i>
-						<span th:text="#{pacote.cadastrar.label}"></span></li>
-				</ul>
-			</div>
-			<a class="btn btn-primary btn-md" th:href="@{/pacotes/listar}"
-				role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
-				aria-hidden="true"></span> <span th:text="#{pacote.listar.label}"></span>
-			</a>
-		</nav>
+    <nav class="navbar navbar-expand-md bg-light">
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><i class="oi oi-caret-right"></i>
+                    <span th:text="#{pacote.cadastrar.label}"></span></li>
+            </ul>
+        </div>
+        <a class="btn btn-primary btn-md" th:href="@{/pacotes/listar}"
+           role="button"> <span class="oi oi-spreadsheet" title="Cadastro"
+                                aria-hidden="true"></span> <span th:text="#{pacote.listar.label}"></span>
+        </a>
+    </nav>
 
-		<div class="container" id="cadastro">
+    <div class="container" id="cadastro">
 
-			<div th:replace="fragments/alert"></div>
+        <div th:replace="fragments/alert"></div>
 
-			<form
-				th:action="${pacote.id == null} ? @{/pacotes/salvar} : @{/pacotes/editar}"
-				th:object="${pacote}" method="POST">
+        <form
+                th:action="${pacote.id == null} ? @{/pacotes/salvar} : @{/pacotes/editar}"
+                th:object="${pacote}" method="POST">
+            <div class="form-row">
 
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label th:text="#{pacote.titulo.label}" for="nome"></label> 
-						<input type="text" class="form-control" id="nome" placeholder="Título"
-							autofocus="autofocus" th:field="*{titulo}"
-							th:classappend="${#fields.hasErrors('titulo')} ? is-invalid" />
-						
-						<div class="invalid-feedback">
-							<span th:errors="*{titulo}"></span>
-						</div>
-					</div>
+                <div class="form-group col-md-6">
+                    <label th:text="#{pacote.agencia.label}" for="agencia"></label>
+                    <select id="agencia" class="form-control" th:field="*{agencia}"
+                            th:classappend="${#fields.hasErrors('agencia')} ? is-invalid">
+                        <option value="">Selecione</option>
+                        <option th:each="agencia : ${agencias}" th:value="${agencia.id}"
+                                th:text="${agencia.nome}"></option>
+                    </select>
 
-					<div class="form-group col-md-6">
-						<label th:text="#{pacote.autor.label}" for="nome"></label> 
-						<input type="text" class="form-control" id="nome" placeholder="Autor"
-							autofocus="autofocus" th:field="*{autor}"
-							th:classappend="${#fields.hasErrors('autor')} ? is-invalid" />
-						
-						<div class="invalid-feedback">
-							<span th:errors="*{autor}"></span>
-						</div>
-					</div>
+                    <div class="invalid-feedback">
+                        <span th:errors="*{agencia}"></span>
+                    </div>
+                </div>
 
-					<div class="form-group col-md-6">
-						<label th:text="#{pacote.agencia.label}" for="agencia"></label> 
-						<select id="agencia" class="form-control" th:field="*{agencia}"
-							th:classappend="${#fields.hasErrors('agencia')} ? is-invalid">
-							<option value="">Selecione</option>
-							<option th:each="agencia : ${agencias}" th:value="${agencia.id}"
-								th:text="${agencia.nome}"></option>
-						</select>
 
-						<div class="invalid-feedback">
-							<span th:errors="*{agencia}"></span>
-						</div>
-					</div>
+                <div class="form-group col-md-6">
+                    <label th:text="#{pacote.cidade.label}" for="cidade"></label>
+                    <input type="text" class="form-control" id="cidade" maxlength="256" placeholder="Cidade"
+                           th:field="*{cidade}"
+                           th:classappend="${#fields.hasErrors('cidade')} ? is-invalid"/>
+                    <div class="invalid-feedback">
+                        <span th:errors="*{cidade}"></span>
+                    </div>
+                </div>
 
-					<div class="form-group col-md-6">
-						<label th:text="#{pacote.ano.label}" for="ano"></label> 
-						<input type="number" class="form-control" id="nome" placeholder="Ano"
-							autofocus="autofocus" th:field="*{ano}"
-							th:classappend="${#fields.hasErrors('ano')} ? is-invalid" />
-						
-						<div class="invalid-feedback">
-							<span th:errors="*{ano}"></span>
-						</div>
-					</div>
+                <div class="form-group col-md-6">
+                    <label th:text="#{pacote.estado.label}" for="estado"></label>
+                    <input type="text" class="form-control" id="estado" maxlength="256" placeholder="Estado"
+                           th:field="*{estado}"
+                           th:classappend="${#fields.hasErrors('estado')} ? is-invalid"/>
+                    <div class="invalid-feedback">
+                        <span th:errors="*{estado}"></span>
+                    </div>
+                </div>
 
-					<div class="form-group col-md-6">
-						<label th:text="#{pacote.preco.label}" for="preco"></label> 
-						<input type="text" class="form-control" id="preco" placeholder="Preço"
-							data-mask="000000,00" data-mask-reverse="true" th:field="*{preco}" 
-							th:classappend="${#fields.hasErrors('preco')} ? is-invalid" />
-						
-						<div class="invalid-feedback">
-							<span th:errors="*{preco}"></span>
-						</div>
-					</div>
-				</div>
+                <div class="form-group col-md-6">
+                    <label th:text="#{pacote.pais.label}" for="pais"></label>
+                    <input type="text" class="form-control" id="pais" maxlength="256" placeholder="País"
+                           th:field="*{pais}"
+                           th:classappend="${#fields.hasErrors('pais')} ? is-invalid"/>
+                    <div class="invalid-feedback">
+                        <span th:errors="*{pais}"></span>
+                    </div>
+                </div>
 
-				<input type="hidden" id="id" th:field="*{id}" />
-				<button type="submit" th:text="#{button.salvar.label}"
-					class="btn btn-primary btn-sm"></button>
-			</form>
-		</div>
-	</section>
+                <div class="form-group col-md-6">
+                    <label th:text="#{pacote.dataPartida.label}" for="dataPartida"></label>
+                    <input type="date" class="form-control" id="dataPartida" placeholder="" th:field="*{dataPartida}"
+                           th:classappend="${#fields.hasErrors('dataPartida')} ? is-invalid"/>
+                    <div class="invalid-feedback">
+                        <span th:errors="*{dataPartida}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label th:text="#{pacote.duracaoDias.label}" for="duracaoDias"></label>
+                    <input type="number" class="form-control" id="duracaoDias" placeholder="" th:field="*{duracaoDias}"
+                           th:classappend="${#fields.hasErrors('duracaoDias')} ? is-invalid"/>
+                    <div class="invalid-feedback">
+                        <span th:errors="*{duracaoDias}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label th:text="#{pacote.descricao.label}" for="descricao"></label>
+                    <input type="text" class="form-control" id="descricao" maxlength="256"
+                           placeholder="Uma descrição bem bacana" th:field="*{descricao}"
+                           th:classappend="${#fields.hasErrors('descricao')} ? is-invalid"/>
+                    <div class="invalid-feedback">
+                        <span th:errors="*{descricao}"></span>
+                    </div>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label th:text="#{pacote.valor.label}" for="valor"></label>
+                    <input type="text" class="form-control" id="valor" placeholder="Valor"
+                           data-mask="000000,00" data-mask-reverse="true" th:field="*{valor}"
+                           th:classappend="${#fields.hasErrors('valor')} ? is-invalid" />
+
+                    <div class="invalid-feedback">
+                        <span th:errors="*{valor}"></span>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="id" th:field="*{id}"/>
+            <button type="submit" th:text="#{button.salvar.label}"
+                    class="btn btn-primary btn-sm"></button>
+        </form>
+    </div>
+</section>
 </body>
 </html>
