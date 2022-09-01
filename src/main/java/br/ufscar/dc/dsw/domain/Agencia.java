@@ -19,7 +19,7 @@ public class Agencia extends Usuario{
     
     @UniqueCNPJ (message = "{Unique.agencia.CNPJ}")
 	@NotBlank(message = "{NotBlank.agencia.CNPJ}")
-	@Size(min = 14, max = 14, message = "{Size.agencia.CNPJ}")
+	@Size(min = 14, max = 18, message = "{Size.agencia.CNPJ}")
 	@Column(nullable = false, unique = true, length = 60)
 	private String CNPJ;
 

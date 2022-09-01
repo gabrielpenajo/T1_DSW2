@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.IPacoteDAO;
+import br.ufscar.dc.dsw.dao.IPropostaDAO;
 import br.ufscar.dc.dsw.domain.Agencia;
 import br.ufscar.dc.dsw.domain.Pacote;
+import br.ufscar.dc.dsw.domain.Proposta;
 import br.ufscar.dc.dsw.service.spec.IPacoteService;
 
 @Service
@@ -19,11 +21,19 @@ public class PacoteService implements IPacoteService {
 	@Autowired
 	IPacoteDAO dao;
 
+	@Autowired
+	IPropostaDAO daoProposta;
+
 	public void salvar(Pacote pacote) {
 		dao.save(pacote);
 	}
 
 	public void excluir(Long id) {
+		Pacote pacote = this.buscarPorId(id);
+		List<Proposta> propostas = pacote.getPropostas();
+		for(Proposta proposta: propostas)
+			daoProposta.deleteById(proposta.getId());
+
 		dao.deleteById(id);
 	}
 

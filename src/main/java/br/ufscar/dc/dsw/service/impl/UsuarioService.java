@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
 import br.ufscar.dc.dsw.domain.Usuario;
+import br.ufscar.dc.dsw.service.spec.IAgenciaService;
+import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.service.spec.IUsuarioService;
 
 @Service
@@ -17,11 +19,23 @@ public class UsuarioService implements IUsuarioService {
 	@Autowired
 	IUsuarioDAO dao;
 
+	@Autowired
+	IAgenciaService serviceAgencia;
+
+	@Autowired
+	IClienteService serviceCliente;
+
 	public void salvar(Usuario usuario) {
 		dao.save(usuario);
 	}
 
 	public void excluir(Long id) {
+		Usuario usuario = dao.findById(id.longValue());
+		String role = usuario.getPapel();
+		if (role.equals("CLIENTE") || role.equals("ADMIN"))
+			serviceCliente.excluir(id);
+		if (role.equals("AGENCIA"))
+			serviceAgencia.excluir(id);
 		dao.deleteById(id);
 	}
 

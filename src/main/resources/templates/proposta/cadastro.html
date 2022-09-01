@@ -9,11 +9,11 @@
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active"><i class="oi oi-caret-right"></i>
-						<span th:text="#{compra.cadastrar.label}"></span></li>
+						<span th:text="#{proposta.cadastrar.label}"></span></li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/compras/listar}"
+				<a class="btn btn-primary btn-md" th:href="@{/propostas/listar}"
 					role="button"> <span class="oi oi-spreadsheet" title="Listar"
-					aria-hidden="true"></span> <span th:text="#{compra.listar.label}"></span>
+					aria-hidden="true"></span> <span th:text="#{proposta.listar.label}"></span>
 				</a>
 			</div>
 		</nav>
@@ -22,7 +22,7 @@
 
 			<div th:replace="fragments/alert"></div>
 
-			<form th:action="@{/compras/salvar}" th:object="${compra}"
+			<form th:action="@{/propostas/salvar}" th:object="${proposta}"
 				method="POST">
 
 				<div th:replace="fragments/validacao :: validacao"></div>
@@ -34,11 +34,10 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th th:text="#{pacote.titulo.label}"></th>
-									<th th:text="#{pacote.autor.label}"></th>
+									<th th:text="#{pacote.destino.label}"></th>
 									<th th:text="#{pacote.agencia.label}"></th>
-									<th th:text="#{pacote.ano.label}"></th>
-									<th th:text="#{pacote.preco.label}"></th>
+									<th th:text="#{pacote.dataPartida.label}"></th>
+									<th th:text="#{pacote.valor.label}"></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -46,11 +45,10 @@
 									<td>
 										<input type="radio" th:id="${pacote.id}" name="pacote" th:value="${pacote.id}" th:field="*{pacote}" required>
 									</td>
-									<td th:text="${pacote.titulo}"></td>
-									<td th:text="${pacote.autor}"></td>
+									<td th:text="${pacote.getDestino()}"></td>
 									<td th:text="${pacote.agencia.nome}"></td>
-									<td th:text="${pacote.ano}"></td>
-									<td th:text="|R$ ${#numbers.formatDecimal(pacote.preco,2,2,'COMMA')}|"></td>
+									<td th:text="${pacote.dataPartida}"></td>
+									<td th:text="|R$ ${#numbers.formatDecimal(pacote.valor,2,2,'COMMA')}|"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -61,8 +59,8 @@
 					</div>
 				</div>
 				
-				<input type="hidden" th:field="*{usuario}" id="usuario">
-				<input type="hidden" th:field="*{data}" id="data">
+				<input type="hidden" th:field="*{cliente}" id="cliente">
+				<input type="hidden" th:field="*{dataProposta}" id="dataProposta">
 
 				<button type="submit" th:text="#{button.salvar.label}"
 					class="btn btn-primary btn-sm"></button>

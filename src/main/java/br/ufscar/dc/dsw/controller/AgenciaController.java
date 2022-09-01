@@ -3,6 +3,7 @@ package br.ufscar.dc.dsw.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -18,6 +19,9 @@ import br.ufscar.dc.dsw.service.spec.IAgenciaService;
 @Controller
 @RequestMapping("/agencias")
 public class AgenciaController {
+	
+	@Autowired
+    private BCryptPasswordEncoder encoder;
 	
 	@Autowired
 	private IAgenciaService service;
@@ -36,10 +40,18 @@ public class AgenciaController {
 	@PostMapping("/salvar")
 	public String salvar(@Valid Agencia agencia, BindingResult result, RedirectAttributes attr) {
 		
+		if (!isCnpjValid(agencia.getCNPJ())) {
+			result.rejectValue("CNPJ", "Unique.agencia.CNPJ");
+		}
+
 		if (result.hasErrors()) {
+			attr.addFlashAttribute("fail", "agencia.create.fail");
 			return "agencia/cadastro";
 		}
-		
+
+		agencia.setSenha(encoder.encode(agencia.getSenha()));
+        agencia.setPapel("AGENCIA");
+
 		service.salvar(agencia);
 		attr.addFlashAttribute("sucess", "agencia.create.sucess");
 		return "redirect:/agencias/listar";
@@ -56,10 +68,14 @@ public class AgenciaController {
 		
 		// Apenas rejeita se o problema não for com o CNPJ (CNPJ campo read-only) 
 		
-		if (result.getFieldErrorCount() > 1 || result.getFieldError("CNPJ") == null) {
+		if ((result.getFieldErrorCount() > 1 || result.getFieldError("CNPJ") != null) &&
+			service.buscarPorId(agencia.getId()) == null) {
+
+			result.getFieldError("CNPJ");
 			return "agencia/cadastro";
 		}
 
+		agencia.setSenha(encoder.encode(agencia.getSenha()));
 		service.salvar(agencia);
 		attr.addFlashAttribute("sucess", "agencia.edit.sucess");
 		return "redirect:/agencias/listar";
@@ -67,12 +83,16 @@ public class AgenciaController {
 	
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, ModelMap model) {
-		if (service.agenciaTemPacotes(id)) {
-			model.addAttribute("fail", "agencia.delete.fail");
-		} else {
-			service.excluir(id);
-			model.addAttribute("sucess", "agencia.delete.sucess");
-		}
+		// if (service.agenciaTemPacotes(id)) {
+		// 	model.addAttribute("fail", "agencia.delete.fail");
+		// } else {
+		service.excluir(id);
+		model.addAttribute("sucess", "agencia.delete.sucess");
+		// }
 		return listar(model);
+	}
+
+	private Boolean isCnpjValid(String cnpj) {
+		return service.buscarPorCNPJ(cnpj) == null;
 	}
 }

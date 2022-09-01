@@ -30,20 +30,18 @@
 					<thead>
 						<tr>
 							<th class="bg-warning">#</th>
-							<th class="bg-warning" th:text="#{proposta.data.label}"></th>
 							<th class="bg-warning" th:text="#{pacote.destino.label}"></th>
 							<th class="bg-warning" th:text="#{pacote.agencia.label}"></th>
-							<th class="bg-warning" th:text="#{pacote.ano.label}"></th>
+							<th class="bg-warning" th:text="#{pacote.dataPartida.label}"></th>
 							<th class="bg-warning" th:text="#{proposta.valor.label}"></th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="proposta : ${propostas}">
 							<td th:text="${proposta.id}"></td>
-							<td th:text="${proposta.data}"></td>
 							<td th:text="${proposta.pacote.destino}"></td>
 							<td th:text="${proposta.pacote.agencia.nome}"></td>
-							<td th:text="${proposta.pacote.ano}"></td>
+							<td th:text="${proposta.pacote.dataPartida}"></td>
 							<td th:text="|R$ ${#numbers.formatDecimal(proposta.valor,2,2,'COMMA')}|"></td>
 						</tr>
 					</tbody>

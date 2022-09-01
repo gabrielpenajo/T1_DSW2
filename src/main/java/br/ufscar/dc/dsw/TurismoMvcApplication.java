@@ -53,7 +53,7 @@ public class TurismoMvcApplication {
 			Agencia a1 = new Agencia();
 			a1.setEmail("fulano@email.com");
 			a1.setSenha(encoder.encode("123"));
-			a1.setCNPJ("01234567890123");
+			a1.setCNPJ("01.234.567/8901-23");
 			a1.setPapel("AGENCIA");
 			a1.setNome("Fulano Silva");
 			agenciaDAO.save(a1);

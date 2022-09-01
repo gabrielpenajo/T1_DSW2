@@ -8,7 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
 import br.ufscar.dc.dsw.dao.IClienteDAO;
+import br.ufscar.dc.dsw.dao.IPropostaDAO;
 import br.ufscar.dc.dsw.domain.Cliente;
+import br.ufscar.dc.dsw.domain.Proposta;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
 
 @Service
@@ -18,6 +20,9 @@ public class ClienteService implements IClienteService {
     @Autowired
     IClienteDAO dao;
 
+    @Autowired
+	IPropostaDAO daoProposta;
+
     @Override
     public void salvar(Cliente cliente) {
         dao.save(cliente);
@@ -25,6 +30,11 @@ public class ClienteService implements IClienteService {
 
     @Override
     public void excluir(Long id) {
+        List<Proposta> propostasCliente = daoProposta.findAllByCliente_Id(id);
+		for (Proposta proposta : propostasCliente) {
+			daoProposta.deleteById(proposta.getId());
+		}
+
         dao.deleteById(id);
     }
 

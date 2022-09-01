@@ -53,6 +53,31 @@
 					</div>
 				</div>
 
+				<div class="form-row">
+					<div class="form-group col-md-6">
+						<label th:text="#{usuario.email.label}" for="email"></label> 
+						<input type="email" class="form-control" id="email" autofocus="autofocus"
+							th:field="*{email}" th:placeholder="#{usuario.email.label}"
+							th:classappend="${#fields.hasErrors('email')} ? is-invalid" />
+
+						<div class="invalid-feedback">
+							<span th:errors="*{email}"></span>
+						</div>
+					</div>
+
+					<div class="form-group col-md-6">
+						<label th:text="#{usuario.password.label}" for="senha"></label> 
+						<input type="text" class="form-control" id="senha" autofocus="autofocus"
+							th:field="*{senha}" placeholder="*****"
+							th:classappend="${#fields.hasErrors('senha')} ? is-invalid" />
+							
+						<div class="invalid-feedback">
+							<span th:errors="*{senha}"></span>
+						</div>
+					</div>
+				</div>
+
+				<input type="hidden" id="papel" name="papel" value="AGENCIA" />
 				<input type="hidden" id="id" th:field="*{id}" />
 				<button type="submit" th:text="#{button.salvar.label}"
 					class="btn btn-primary btn-sm"></button>
