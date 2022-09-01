@@ -71,4 +71,30 @@ public class PacoteService implements IPacoteService {
 	public List<Pacote> BuscarPorDataPartida(Date data) {
 		return dao.findByDataPartida(data);
 	}
+
+	@Override
+	public List<Pacote> buscarTodosValidos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Pacote> buscarPorAgenciaValidos(Agencia a) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Pacote> buscarPorDestino(String destino) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Pacote> buscarEAplicarFltros(String destino, Agencia a, Date dataPartida, String validoStr) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 }
