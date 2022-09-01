@@ -1,7 +1,10 @@
 package br.ufscar.dc.dsw.service.impl;
 
+import java.time.Instant;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -74,14 +77,21 @@ public class PacoteService implements IPacoteService {
 
 	@Override
 	public List<Pacote> buscarTodosValidos() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Pacote> pacotes = this.buscarTodos();
+		Date dataHoje = Date.from(Instant.now());
+		pacotes = pacotes.stream().filter(x -> x.getDataPartida().after(dataHoje)).collect(Collectors.toList());
+
+		return pacotes;
 	}
 
 	@Override
 	public List<Pacote> buscarPorAgenciaValidos(Agencia a) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Pacote> pacotesAgencia = this.buscarPorAgencia(a);
+		Date dataHoje = Date.from(Instant.now());
+		pacotesAgencia = pacotesAgencia.stream().filter(x -> x.getDataPartida().after(dataHoje)).collect(Collectors.toList());
+
+		return pacotesAgencia;
 	}
 
 	@Override
