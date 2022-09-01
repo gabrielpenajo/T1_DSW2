@@ -26,7 +26,15 @@ public class PacoteService implements IPacoteService {
 	@Autowired
 	IPropostaDAO daoProposta;
 
+
 	public void salvar(Pacote pacote) {
+	
+		List<Proposta> propostas = pacote.getPropostas();
+		for(Proposta proposta: propostas) {
+			proposta.setPacote(pacote);	
+			daoProposta.save(proposta);
+		}
+
 		dao.save(pacote);
 	}
 
