@@ -28,6 +28,18 @@ public class AgenciaService implements IAgenciaService {
 	IPropostaDAO daoProposta;
 
 	public void salvar(Agencia agencia) {
+
+		List<Pacote> pacotes = agencia.getPacotes();
+		for(Pacote pacote: pacotes) {
+			pacote.setAgencia(agencia);
+			List<Proposta> propostas = pacote.getPropostas();
+			for(Proposta proposta: propostas) {
+				proposta.setPacote(pacote);
+				daoProposta.save(proposta);
+			}
+			daoPacote.save(pacote);
+		}
+
 		dao.save(agencia);
 	}
 

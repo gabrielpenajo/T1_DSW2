@@ -10,16 +10,20 @@ public interface IPacoteService {
 
 	Pacote buscarPorId(Long id);
 
-	List<Pacote> buscarTodos();
-
+	
 	void salvar(Pacote pacote);
-
+	
 	void excluir(Long id);	
-
+	
+	List<Pacote> buscarTodos();
+	List<Pacote> buscarTodosValidos();
+	List<Pacote> buscarPorAgenciaValidos(Agencia a);
+	List<Pacote> buscarPorDestino(String destino);
 	List<Pacote> buscarPorAgencia(Agencia a);
 	List<Pacote> buscarPorCidade(String cidade);
 	List<Pacote> buscarPorEstado(String estado);
 	List<Pacote> buscarPorPais(String pais);
 	List<Pacote> BuscarPorDataPartida(Date data);
+	List<Pacote> buscarEAplicarFltros(String destino, Agencia a, Date dataPartida, String validoStr);
 
 }
