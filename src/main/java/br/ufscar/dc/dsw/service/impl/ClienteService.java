@@ -25,6 +25,13 @@ public class ClienteService implements IClienteService {
 
     @Override
     public void salvar(Cliente cliente) {
+
+        List<Proposta> propostas = cliente.getPropostas();
+        for(Proposta proposta: propostas) {
+            proposta.setCliente(cliente);
+            daoProposta.save(proposta);
+        }
+
         dao.save(cliente);
     }
 
