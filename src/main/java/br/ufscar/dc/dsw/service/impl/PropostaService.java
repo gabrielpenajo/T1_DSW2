@@ -51,5 +51,17 @@ public class PropostaService implements IPropostaService {
 		return dao.findAllByPacote_Id(id);
 	}
 
+	@Override
+	public List<Proposta> buscarTodosAtivosPorCliente_Id(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Proposta> buscarTodosCanceladosPorCliente_Id(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

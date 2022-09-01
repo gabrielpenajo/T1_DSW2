@@ -14,8 +14,10 @@ public interface IPropostaService {
 
 	void excluir(Long id);
 
-	public List<Proposta> buscarTodosPorCliente_Id(Long id);
-	public List<Proposta> buscarTodosPorCliente_CPF(String CPF);
-	public List<Proposta> buscarTodosPorPacote_Id(Long id);
-	// servico para propostas validas
+	List<Proposta> buscarTodosPorCliente_Id(Long id);
+	List<Proposta> buscarTodosPorCliente_CPF(String CPF);
+	List<Proposta> buscarTodosPorPacote_Id(Long id);
+	List<Proposta> buscarTodosAtivosPorCliente_Id(Long id);
+	List<Proposta> buscarTodosCanceladosPorCliente_Id(Long id);
+	
 }
