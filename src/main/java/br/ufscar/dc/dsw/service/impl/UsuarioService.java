@@ -6,7 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.ufscar.dc.dsw.dao.IAgenciaDAO;
+import br.ufscar.dc.dsw.dao.IClienteDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
+import br.ufscar.dc.dsw.domain.Agencia;
+import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Usuario;
 import br.ufscar.dc.dsw.service.spec.IAgenciaService;
 import br.ufscar.dc.dsw.service.spec.IClienteService;
@@ -20,12 +24,30 @@ public class UsuarioService implements IUsuarioService {
 	IUsuarioDAO dao;
 
 	@Autowired
+	IAgenciaDAO agenciaDAO;
+
+	@Autowired
+	IClienteDAO clienteDAO;
+
+	@Autowired
 	IAgenciaService serviceAgencia;
 
 	@Autowired
 	IClienteService serviceCliente;
 
 	public void salvar(Usuario usuario) {
+		String role = usuario.getPapel();
+		if (role.equals("CLIENTE") || role.equals("ADMIN")) {
+			Long id = usuario.getId();
+			Cliente cliente = clienteDAO.findById(id.longValue());
+			serviceCliente.salvar(cliente);
+		}
+		if (role.equals("AGENCIA")) {
+			Long id = usuario.getId();
+			Agencia agencia = agenciaDAO.findById(id.longValue());
+			serviceAgencia.salvar(agencia);
+		}
+		
 		dao.save(usuario);
 	}
 
