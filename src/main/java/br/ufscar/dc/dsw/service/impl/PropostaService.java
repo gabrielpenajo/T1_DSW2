@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,14 +54,21 @@ public class PropostaService implements IPropostaService {
 
 	@Override
 	public List<Proposta> buscarTodosAtivosPorCliente_Id(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Proposta> propostasAtivas = this.buscarTodosPorCliente_Id(id);
+
+		propostasAtivas = propostasAtivas.stream().filter(x -> x.getStatusProposta() == 1).collect(Collectors.toList());
+
+		return propostasAtivas;
 	}
 
 	@Override
 	public List<Proposta> buscarTodosCanceladosPorCliente_Id(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Proposta> propostasCanceladas = this.buscarTodosPorCliente_Id(id);
+
+		propostasCanceladas = propostasCanceladas.stream().filter(x -> x.getStatusProposta() == 0).collect(Collectors.toList());
+
+		return propostasCanceladas;
+
 	}
 
 
