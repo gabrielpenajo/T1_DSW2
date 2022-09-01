@@ -42,10 +42,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 				http.authorizeRequests()
 				.antMatchers("/error", "/login/**", "/js/**", "/css/**", "/image/**", "/webjars/**").permitAll()
-				.antMatchers("/agencias/**", "/pacotes/**", "/usuarios/**").hasRole("ADMIN")
-				.antMatchers("/agencias/listar").hasAnyRole("CLIENTE", "AGENCIA", "ADMIN")
-				.antMatchers("/pacotes/**").hasAnyRole("AGENCIA", "CLIENTE", "ADMIN")
-
+				.antMatchers("/agencias/listar").hasAnyRole("AGENCIA", "CLIENTE", "ADMIN")
+				.antMatchers("/pacotes/listar").hasAnyRole("AGENCIA", "CLIENTE", "ADMIN")
+				.antMatchers("/agencias/**", "/usuarios/**").hasRole("ADMIN")
+				.antMatchers("/pacotes/**").hasAnyRole("AGENCIA")
 				.anyRequest().authenticated()
 			.and()
 				.formLogin()

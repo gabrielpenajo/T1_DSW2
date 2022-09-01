@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head>
 <meta charset="UTF-8" />
 </head>
@@ -14,7 +17,8 @@
 						<span th:text="#{agencia.listar.label}"></span>
 					</li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/agencias/cadastrar}" role="button"> 
+				<a class="btn btn-primary btn-md" sec:authorize="hasRole('ROLE_ADMIN')"
+				th:href="@{/agencias/cadastrar}" role="button"> 
 					<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
 					<span th:text="#{agencia.cadastrar.label}"></span>
 				</a>
@@ -32,7 +36,7 @@
 							<th>#</th>
 							<th th:text="#{agencia.cnpj.label}"></th>
 							<th th:text="#{agencia.nome.label}"></th>
-							<th th:text="#{acao.label}"></th>
+							<th th:text="#{acao.label}" sec:authorize="hasRole('ROLE_ADMIN')"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -40,7 +44,7 @@
 							<td th:text="${agencia.id}"></td>
 							<td th:text="${agencia.CNPJ}"></td>
 							<td th:text="${agencia.nome}"></td>
-							<td colspan="2">
+							<td colspan="2" sec:authorize="hasRole('ROLE_ADMIN')">
 								<a class="btn btn-info btn-sm" th:href="@{/agencias/editar/{id} (id=${agencia.id}) }"
 									role="button"> 
 									<span class="oi oi-brush" th:title="#{link.editar.label}" aria-hidden="true"> </span>

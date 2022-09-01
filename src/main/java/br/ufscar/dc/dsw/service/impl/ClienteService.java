@@ -27,10 +27,12 @@ public class ClienteService implements IClienteService {
     public void salvar(Cliente cliente) {
 
         List<Proposta> propostas = cliente.getPropostas();
-        for(Proposta proposta: propostas) {
-            proposta.setCliente(cliente);
-            daoProposta.save(proposta);
-        }
+
+        if (propostas != null)
+            for(Proposta proposta: propostas) {
+                proposta.setCliente(cliente);
+                daoProposta.save(proposta);
+            }
 
         dao.save(cliente);
     }
@@ -38,9 +40,11 @@ public class ClienteService implements IClienteService {
     @Override
     public void excluir(Long id) {
         List<Proposta> propostasCliente = daoProposta.findAllByCliente_Id(id);
-		for (Proposta proposta : propostasCliente) {
-			daoProposta.deleteById(proposta.getId());
-		}
+        if (propostasCliente != null ) {
+            for (Proposta proposta : propostasCliente) {
+                daoProposta.deleteById(proposta.getId());
+            }
+        }
 
         dao.deleteById(id);
     }

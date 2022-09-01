@@ -30,14 +30,16 @@ public class AgenciaService implements IAgenciaService {
 	public void salvar(Agencia agencia) {
 
 		List<Pacote> pacotes = agencia.getPacotes();
-		for(Pacote pacote: pacotes) {
-			pacote.setAgencia(agencia);
-			List<Proposta> propostas = pacote.getPropostas();
-			for(Proposta proposta: propostas) {
-				proposta.setPacote(pacote);
-				daoProposta.save(proposta);
+		if (pacotes != null ) {
+			for(Pacote pacote: pacotes) {
+				pacote.setAgencia(agencia);
+				List<Proposta> propostas = pacote.getPropostas();
+				for(Proposta proposta: propostas) {
+					proposta.setPacote(pacote);
+					daoProposta.save(proposta);
+				}
+				daoPacote.save(pacote);
 			}
-			daoPacote.save(pacote);
 		}
 
 		dao.save(agencia);
@@ -46,11 +48,13 @@ public class AgenciaService implements IAgenciaService {
 	public void excluir(Long id) {
 		Agencia agencia = this.buscarPorId(id);
 		List<Pacote> pacotes = agencia.getPacotes();
-		for(Pacote pacote: pacotes) {
-			List<Proposta> propostas = pacote.getPropostas();
-			for(Proposta proposta: propostas)
-				daoProposta.deleteById(proposta.getId());
-			daoPacote.deleteById(pacote.getId());	
+		if (pacotes != null) {
+			for(Pacote pacote: pacotes) {
+				List<Proposta> propostas = pacote.getPropostas();
+				for(Proposta proposta: propostas)
+					daoProposta.deleteById(proposta.getId());
+				daoPacote.deleteById(pacote.getId());	
+			}
 		}
 
 		dao.deleteById(id);

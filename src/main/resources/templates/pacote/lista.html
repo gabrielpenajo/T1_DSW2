@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head>
 </head>
 <body>
@@ -14,9 +17,21 @@
 					</li>
 				</ul>
 			</div>
-			<a class="btn btn-primary btn-md" th:href="@{/pacotes/cadastrar}" role="button"> 
+
+			<a class="btn btn-primary btn-md" sec:authorize="hasRole('ROLE_AGENCIA')"
+			th:href="@{/pacotes/cadastrar}" role="button"> 
 				<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
 				<span th:text="#{pacote.cadastrar.label}"></span>
+			</a>
+			<a class="btn btn-primary btn-md" sec:authorize="hasRole('ROLE_AGENCIA')"
+			th:if="${param.validos == null || param.validos[0] == 'false'}" th:href="@{/pacotes/listar?validos=true}" role="button"> 
+				<span class="oi oi-plus" title="Filtrar" aria-hidden="true"></span> 
+				<span th:text="#{pacote.filtrarValidos.label}"></span>
+			</a>
+			<a class="btn btn-primary btn-md" sec:authorize="hasRole('ROLE_AGENCIA')"
+			th:if="${param.validos != null && param.validos[0] == 'true'}" th:href="@{/pacotes/listar?validos=false}" role="button"> 
+				<span class="oi oi-plus" title="Filtrar" aria-hidden="true"></span> 
+				<span th:text="#{pacote.filtrarTodos.label}"></span>
 			</a>
 		</nav>
 
@@ -33,7 +48,7 @@
 							<th th:text="#{pacote.agencia.label}"></th>
 							<th th:text="#{pacote.dataPartida.label}"></th>
 							<th th:text="#{pacote.valor.label}"></th>
-							<th th:text="#{acao.label}"></th>
+							<th th:text="#{acao.label}" sec:authorize="hasRole('ROLE_AGENCIA')"></th>
 						</tr>
 					</thead>
 					<tbody>						
@@ -43,7 +58,7 @@
 							<td th:text="${pacote.agencia.nome}"></td>
 							<td th:text="${pacote.dataPartida}"></td>
 							<td th:text="|R$ ${#numbers.formatDecimal(pacote.valor,2,2,'COMMA')}|"></td>
-							<td colspan="2">
+							<td colspan="2" sec:authorize="hasRole('ROLE_AGENCIA')">
 								<a class="btn btn-info btn-sm"
 									th:href="@{/pacotes/editar/{id} (id=${pacote.id}) }" role="button"> 
 									<span class="oi oi-brush" th:title="#{link.editar.label}" aria-hidden="true"></span>

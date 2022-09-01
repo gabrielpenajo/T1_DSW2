@@ -77,6 +77,17 @@
 					</div>
 				</div>
 
+				<div class="input-group">
+                    <label class="input-group-text" th:text="#{agencia.descricao.label}" for="descricao"></label>
+                    <textarea class="form-control" aria-label="With textarea" id="descricao" maxlength="256"
+                           th:placeholder="#{agencia.descricao.placeholder}" th:field="*{descricao}"
+                           th:classappend="${#fields.hasErrors('descricao')} ? is-invalid"></textarea>
+                    <div class="invalid-feedback">
+                        <span th:errors="*{descricao}"></span>
+                    </div>
+                </div>
+				<br>
+
 				<input type="hidden" id="papel" name="papel" value="AGENCIA" />
 				<input type="hidden" id="id" th:field="*{id}" />
 				<button type="submit" th:text="#{button.salvar.label}"

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout}"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity">
 <head>
 <meta charset="UTF-8" />
 </head>
@@ -14,7 +17,8 @@
 						<span th:text="#{proposta.listar.label}"></span>
 					</li>
 				</ul>
-				<a class="btn btn-primary btn-md" th:href="@{/propostas/cadastrar}" role="button"> 
+				<a class="btn btn-primary btn-md" sec:authorize="hasRole('ROLE_CLIENTE')"
+				th:href="@{/propostas/cadastrar}" role="button"> 
 					<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
 					<span th:text="#{proposta.cadastrar.label}"></span>
 				</a>
@@ -29,11 +33,12 @@
 				<table class="table table-striped table-hover table-sm">
 					<thead>
 						<tr>
-							<th class="bg-warning">#</th>
-							<th class="bg-warning" th:text="#{pacote.destino.label}"></th>
-							<th class="bg-warning" th:text="#{pacote.agencia.label}"></th>
-							<th class="bg-warning" th:text="#{pacote.dataPartida.label}"></th>
-							<th class="bg-warning" th:text="#{proposta.valor.label}"></th>
+							<th>#</th>
+							<th th:text="#{pacote.destino.label}"></th>
+							<th th:text="#{pacote.agencia.label}"></th>
+							<th th:text="#{pacote.dataPartida.label}"></th>
+							<th th:text="#{proposta.valor.label}"></th>
+							<th th:text="#{proposta.status.label}"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -43,6 +48,7 @@
 							<td th:text="${proposta.pacote.agencia.nome}"></td>
 							<td th:text="${proposta.pacote.dataPartida}"></td>
 							<td th:text="|R$ ${#numbers.formatDecimal(proposta.valor,2,2,'COMMA')}|"></td>
+							<th th:text="#{proposta.statusProposta == 1} ? 'Ativo' : 'Cancelado'"></th>
 						</tr>
 					</tbody>
 				</table>

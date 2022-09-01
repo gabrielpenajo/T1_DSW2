@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.ufscar.dc.dsw.domain.Agencia;
@@ -36,8 +37,15 @@ public class PacoteController {
 	}
 
 	@GetMapping("/listar")
-	public String listar(ModelMap model) {
-		model.addAttribute("pacotes", pacoteService.buscarTodos());
+	public String listar(
+		ModelMap model,
+		@RequestParam(name = "validos", required = false) Boolean validos
+	) {
+		if (validos == null || validos == false) {
+			model.addAttribute("pacotes", pacoteService.buscarTodos());
+		} else {
+			model.addAttribute("pacotes", pacoteService.buscarTodosValidos());
+		}
 		return "pacote/lista";
 	}
 
