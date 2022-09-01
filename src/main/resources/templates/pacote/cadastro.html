@@ -95,7 +95,7 @@
                 <div class="form-group col-md-6">
                     <label th:text="#{pacote.descricao.label}" for="descricao"></label>
                     <input type="text" class="form-control" id="descricao" maxlength="256"
-                           placeholder="Uma descrição bem bacana" th:field="*{descricao}"
+                           th:placeholder="#{pacote.descricao.placeholder}" th:field="*{descricao}"
                            th:classappend="${#fields.hasErrors('descricao')} ? is-invalid"/>
                     <div class="invalid-feedback">
                         <span th:errors="*{descricao}"></span>

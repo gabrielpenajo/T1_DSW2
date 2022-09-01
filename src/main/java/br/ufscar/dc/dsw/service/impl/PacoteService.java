@@ -20,116 +20,119 @@ import br.ufscar.dc.dsw.service.spec.IPacoteService;
 @Transactional(readOnly = false)
 public class PacoteService implements IPacoteService {
 
-	@Autowired
-	IPacoteDAO dao;
+    @Autowired
+    IPacoteDAO dao;
 
-	@Autowired
-	IPropostaDAO daoProposta;
+    @Autowired
+    IPropostaDAO daoProposta;
 
 
-	public void salvar(Pacote pacote) {
-	
-		List<Proposta> propostas = pacote.getPropostas();
-		for(Proposta proposta: propostas) {
-			proposta.setPacote(pacote);	
-			daoProposta.save(proposta);
-		}
+    public void salvar(Pacote pacote) {
 
-		dao.save(pacote);
-	}
+        List<Proposta> propostas = pacote.getPropostas();
+        if (propostas != null) {
+            for (Proposta proposta : propostas) {
+                proposta.setPacote(pacote);
+                daoProposta.save(proposta);
+            }
+        }
 
-	public void excluir(Long id) {
-		Pacote pacote = this.buscarPorId(id);
-		List<Proposta> propostas = pacote.getPropostas();
-		for(Proposta proposta: propostas)
-			daoProposta.deleteById(proposta.getId());
+        dao.save(pacote);
+    }
 
-		dao.deleteById(id);
-	}
+    public void excluir(Long id) {
+        Pacote pacote = this.buscarPorId(id);
+        List<Proposta> propostas = pacote.getPropostas();
+        if(propostas != null) {
+            for (Proposta proposta : propostas)
+                daoProposta.deleteById(proposta.getId());
+        }
+        dao.deleteById(id);
+    }
 
-	@Transactional(readOnly = true)
-	public Pacote buscarPorId(Long id) {
-		return dao.findById(id.longValue());
-	}
+    @Transactional(readOnly = true)
+    public Pacote buscarPorId(Long id) {
+        return dao.findById(id.longValue());
+    }
 
-	@Transactional(readOnly = true)
-	public List<Pacote> buscarTodos() {
-		return dao.findAll();
-	}
+    @Transactional(readOnly = true)
+    public List<Pacote> buscarTodos() {
+        return dao.findAll();
+    }
 
-	@Override
-	public List<Pacote> buscarPorAgencia(Agencia a) {
-		return dao.findByAgencia(a);
-	}
+    @Override
+    public List<Pacote> buscarPorAgencia(Agencia a) {
+        return dao.findByAgencia(a);
+    }
 
-	@Override
-	public List<Pacote> buscarPorCidade(String cidade) {
-		return dao.findByCidade(cidade);
-	}
+    @Override
+    public List<Pacote> buscarPorCidade(String cidade) {
+        return dao.findByCidade(cidade);
+    }
 
-	@Override
-	public List<Pacote> buscarPorEstado(String estado) {
-		return dao.findByEstado(estado);
-	}
+    @Override
+    public List<Pacote> buscarPorEstado(String estado) {
+        return dao.findByEstado(estado);
+    }
 
-	@Override
-	public List<Pacote> buscarPorPais(String pais) {
-		return dao.findByPais(pais);
-	}
+    @Override
+    public List<Pacote> buscarPorPais(String pais) {
+        return dao.findByPais(pais);
+    }
 
-	@Override
-	public List<Pacote> BuscarPorDataPartida(Date data) {
-		return dao.findByDataPartida(data);
-	}
+    @Override
+    public List<Pacote> BuscarPorDataPartida(Date data) {
+        return dao.findByDataPartida(data);
+    }
 
-	@Override
-	public List<Pacote> buscarTodosValidos() {
-		List<Pacote> pacotes = this.buscarTodos();
-		Date dataHoje = Date.from(Instant.now());
-		pacotes = pacotes.stream().filter(x -> x.getDataPartida().after(dataHoje)).collect(Collectors.toList());
+    @Override
+    public List<Pacote> buscarTodosValidos() {
+        List<Pacote> pacotes = this.buscarTodos();
+        Date dataHoje = Date.from(Instant.now());
+        pacotes = pacotes.stream().filter(x -> x.getDataPartida().after(dataHoje)).collect(Collectors.toList());
 
-		return pacotes;
-	}
+        return pacotes;
+    }
 
-	@Override
-	public List<Pacote> buscarPorAgenciaValidos(Agencia a) {
-		
-		List<Pacote> pacotesAgencia = this.buscarPorAgencia(a);
-		Date dataHoje = Date.from(Instant.now());
-		pacotesAgencia = pacotesAgencia.stream().filter(x -> x.getDataPartida().after(dataHoje)).collect(Collectors.toList());
+    @Override
+    public List<Pacote> buscarPorAgenciaValidos(Agencia a) {
 
-		return pacotesAgencia;
-	}
+        List<Pacote> pacotesAgencia = this.buscarPorAgencia(a);
+        Date dataHoje = Date.from(Instant.now());
+        pacotesAgencia = pacotesAgencia.stream().filter(x -> x.getDataPartida().after(dataHoje)).collect(Collectors.toList());
 
-	@Override
-	public List<Pacote> buscarPorDestino(String destino) {
-		
-		List<Pacote> pacotes = this.buscarTodos();
+        return pacotesAgencia;
+    }
 
-		pacotes = pacotes.stream().filter(x -> x.getCidade() == destino).filter(x -> x.getEstado() == destino).filter(x -> x.getPais() == destino).collect(Collectors.toList());
+    @Override
+    public List<Pacote> buscarPorDestino(String destino) {
 
-		return pacotes;
-	}
+        List<Pacote> pacotes = this.buscarTodos();
 
-	@Override
-	public List<Pacote> buscarEAplicarFltros(String destino, Agencia a, Date dataPartida, String validoStr) {
-		// todos os filtros juntos
-		List<Pacote> pacotes = this.buscarTodos();
+        pacotes = pacotes.stream().filter(x -> x.getCidade() == destino).filter(x -> x.getEstado() == destino).filter(x -> x.getPais() == destino).collect(Collectors.toList());
 
-		Boolean valido = validoStr.equals("on") ? true : false;
+        return pacotes;
+    }
 
-		Date hoje = Date.from(Instant.now());
-		if (dataPartida != null)
-			pacotes = pacotes.stream().filter(x -> x.getDataPartida().toString().equals(dataPartida)).collect(Collectors.toList());
-		if (a != null)
-			pacotes = pacotes.stream().filter(x -> x.getAgencia().equals(a)).collect(Collectors.toList());
-		if (destino != "")
-			pacotes = pacotes.stream().filter(x -> x.getCidade().equals(destino) || x.getEstado().equals(destino) || x.getPais().equals(destino)).collect(Collectors.toList());
-		if (valido == true)
-			pacotes = pacotes.stream().filter(x -> x.getDataPartida().after(hoje)).collect(Collectors.toList());
+    @Override
+    public List<Pacote> buscarEAplicarFltros(String destino, Agencia a, Date dataPartida, String validoStr) {
+        // todos os filtros juntos
+        List<Pacote> pacotes = this.buscarTodos();
 
-		return pacotes;
-	}
+        Boolean valido = validoStr.equals("on") ? true : false;
 
-	
+        Date hoje = Date.from(Instant.now());
+        if (dataPartida != null)
+            pacotes = pacotes.stream().filter(x -> x.getDataPartida().toString().equals(dataPartida)).collect(Collectors.toList());
+        if (a != null)
+            pacotes = pacotes.stream().filter(x -> x.getAgencia().equals(a)).collect(Collectors.toList());
+        if (destino != "")
+            pacotes = pacotes.stream().filter(x -> x.getCidade().equals(destino) || x.getEstado().equals(destino) || x.getPais().equals(destino)).collect(Collectors.toList());
+        if (valido == true)
+            pacotes = pacotes.stream().filter(x -> x.getDataPartida().after(hoje)).collect(Collectors.toList());
+
+        return pacotes;
+    }
+
+
 }
