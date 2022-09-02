@@ -38,7 +38,7 @@
 					<input type="text" class="form-control" id="destino" autofocus="autofocus" name="destino"/>
 				</div>
 				<div class="input-group col-md-6" sec:authorize="!hasRole('ROLE_AGENCIA')">
-					<label th:text="#{pacote.agencia.label}" class="input-group-text" for="agencia"></label>
+					<label th:text="#{pacote.agencia.label}" class="input-group-text" for="destino"></label>
                     <select id="agencia" class="form-control" name="agencia">
                         <option value="">Selecione</option>
                         <option th:each="agencia : ${agencias}" th:value="${agencia.id}"

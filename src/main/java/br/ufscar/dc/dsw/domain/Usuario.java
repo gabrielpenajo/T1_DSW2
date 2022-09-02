@@ -1,5 +1,8 @@
 package br.ufscar.dc.dsw.domain;
 
+import br.ufscar.dc.dsw.validation.UniqueCPF;
+import br.ufscar.dc.dsw.validation.UniqueEmail;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +29,8 @@ public class Usuario {
 	@Size(min = 3, max = 256)
     @Column(nullable = false, length = 256)
     private String nome;
-	
+
+	@UniqueEmail
 	@NotBlank(message = "{NotBlank.usuario.email}")
 	@Size(max = 256)
     @Column(nullable = false, length = 256, unique = true)

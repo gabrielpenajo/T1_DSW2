@@ -3,11 +3,7 @@ package br.ufscar.dc.dsw.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.validation.Valid;
 
@@ -142,10 +138,16 @@ public class PacoteController {
 		return "redirect:/pacotes/listar";
 	}
 
-	@ModelAttribute("agencia")
-	public Agencia getAgencia() {
+	@ModelAttribute("agencias")
+	public List<Agencia> getAgencia() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		return agenciaService.buscarPorEmail(authentication.getName());
+		List<Agencia> agenciaLogadaList = new ArrayList<>();
+		Agencia agenciaLogada = agenciaService.buscarPorEmail(authentication.getName());
+
+		if(agenciaLogada != null) {
+			agenciaLogadaList.add(agenciaLogada);
+			return agenciaLogadaList;
+		} else return agenciaService.buscarTodos();
 	}
 
 	@ModelAttribute("imagens")
