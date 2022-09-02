@@ -59,7 +59,9 @@ public class UsuarioController {
 	@PostMapping("/editar")
 	public String editar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attr) {
 		
-		if (result.hasErrors()) {
+		if (result.hasErrors() && (result.getFieldErrorCount("email") > 1 ||
+			result.getFieldErrorCount("senha") > 2 || result.getFieldErrorCount("senha") == 1) 
+		) {
 			return "usuario/cadastro";
 		}
 
