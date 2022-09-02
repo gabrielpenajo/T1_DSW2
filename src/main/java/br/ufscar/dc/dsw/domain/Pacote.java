@@ -64,15 +64,15 @@ public class Pacote extends AbstractEntity<Long> {
     @Column(nullable = true)
     private String pictures;
 
+    public void initPictures() {
+        this.pictures = "";
+    }
+
     public void setPictures(String _pictures) {
-        if (this.pictures == null) {
-            System.out.println("\n\n\n\n\nUWU: " + this.pictures + "\n");
+        if (this.pictures == null || this.pictures.length() == 0) {
             this.pictures = _pictures + "|";
-            System.out.println("OWO: " + this.pictures + "\n\n\n\n\n\n\n");
         } else {
-            System.out.println("\n\n\n\n\nOLD PICTURES: " + this.pictures + "\n");
             this.pictures += _pictures + "|";
-            System.out.println("NEW PICTURES: " + this.pictures + "\n\n\n\n\n\n\n");
         }
     }
 

@@ -1,7 +1,10 @@
 package br.ufscar.dc.dsw.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,13 +49,33 @@ public class PacoteController {
 	@GetMapping("/listar")
 	public String listar(
 		ModelMap model,
-		@RequestParam(name = "validos", required = false) Boolean validos
-	) {
-		if (validos == null || validos == false) {
-			model.addAttribute("pacotes", pacoteService.buscarTodos());
+		@RequestParam(name = "validos", required = false) String validos,
+		@RequestParam(name = "destino", required = false) String destino,
+		@RequestParam(name = "agencia", required = false) Long agenciaId,
+		@RequestParam(name = "data", required = false) String dataStr
+	) throws ParseException {
+		if (validos != null) {
+			validos = "on";
 		} else {
-			model.addAttribute("pacotes", pacoteService.buscarTodosValidos());
+			validos = "off";
 		}
+
+		Agencia agencia = null;
+		if (agenciaId != null) {
+			agencia = agenciaService.buscarPorId(agenciaId);
+		}
+
+		Date data = null;
+		if (dataStr != null && dataStr.length() > 0) {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			data = format.parse(dataStr);
+
+			dataStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S").format(data);
+		} else {
+			dataStr = null;
+		}
+
+		model.addAttribute("pacotes", pacoteService.buscarEAplicarFltros(destino, agencia, dataStr, validos));
 		return "pacote/lista";
 	}
 
@@ -62,7 +85,7 @@ public class PacoteController {
 		if (result.hasErrors()) {
 			return "pacote/cadastro";
 		}
-
+		pacote.initPictures();
 		pacoteService.salvar(pacote);
 		attr.addFlashAttribute("sucess", "pacote.create.sucess");
 		return savePacoteFoto(pacote, file, attr, model);
@@ -78,7 +101,9 @@ public class PacoteController {
 		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		if (fileName != null && fileName.length() > 0) {
 			pacote.setPictures(pacoteService.buscarPorId(pacote.getId()).getPictures() + fileName);
-
+			
+			if (pacoteService.buscarPorId(pacote.getId()).getPictures().equals(fileName + "|"))
+				pacoteService.salvar(pacote);
 			String uploadDir = "pacoteFotos/" + pacote.getId();
 
 			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);

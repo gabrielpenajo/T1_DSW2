@@ -24,7 +24,7 @@ public interface IPacoteService {
 	List<Pacote> buscarPorEstado(String estado);
 	List<Pacote> buscarPorPais(String pais);
 	List<Pacote> BuscarPorDataPartida(Date data);
-	List<Pacote> buscarEAplicarFltros(String destino, Agencia a, Date dataPartida, String validoStr);
+	List<Pacote> buscarEAplicarFltros(String destino, Agencia a, String dataPartida, String validoStr);
 	List<String> buscarImagens(String paths);
 
 }

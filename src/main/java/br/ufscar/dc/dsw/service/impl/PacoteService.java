@@ -117,18 +117,18 @@ public class PacoteService implements IPacoteService {
     }
 
     @Override
-    public List<Pacote> buscarEAplicarFltros(String destino, Agencia a, Date dataPartida, String validoStr) {
+    public List<Pacote> buscarEAplicarFltros(String destino, Agencia a, String dataPartida, String validoStr) {
         // todos os filtros juntos
         List<Pacote> pacotes = this.buscarTodos();
 
         Boolean valido = validoStr.equals("on") ? true : false;
 
         Date hoje = Date.from(Instant.now());
-        if (dataPartida != null)
+        if (dataPartida != null && dataPartida.length() > 0)
             pacotes = pacotes.stream().filter(x -> x.getDataPartida().toString().equals(dataPartida)).collect(Collectors.toList());
         if (a != null)
             pacotes = pacotes.stream().filter(x -> x.getAgencia().equals(a)).collect(Collectors.toList());
-        if (destino != "")
+        if (destino != null && destino != "")
             pacotes = pacotes.stream().filter(x -> x.getCidade().equals(destino) || x.getEstado().equals(destino) || x.getPais().equals(destino)).collect(Collectors.toList());
         if (valido == true)
             pacotes = pacotes.stream().filter(x -> x.getDataPartida().after(hoje)).collect(Collectors.toList());

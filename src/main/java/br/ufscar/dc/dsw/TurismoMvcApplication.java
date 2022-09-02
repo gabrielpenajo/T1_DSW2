@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -21,7 +22,6 @@ import br.ufscar.dc.dsw.domain.Agencia;
 import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Pacote;
 import br.ufscar.dc.dsw.domain.Proposta;
-import br.ufscar.dc.dsw.domain.Usuario;
 
 @SpringBootApplication
 public class TurismoMvcApplication {
@@ -67,7 +67,7 @@ public class TurismoMvcApplication {
 			p1.setCidade("São Carlos");
 			p1.setEstado("São Paulo");
 			p1.setPais("São Paulo");
-			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 			Date dataPartida = formatter.parse("20/11/2015");
 			p1.setDataPartida(dataPartida);
 			p1.setDuracaoDias((long) 2);
@@ -83,9 +83,6 @@ public class TurismoMvcApplication {
 			prop1.setValor(p1.getValor());
 			prop1.setStatusProposta(1);
 			propostaDAO.save(prop1);
-
-			for (Usuario u : usuarioDAO.findAll())
-				System.out.println(u.getEmail().toString() + " " + u.getSenha());
 		};
 	}
 }

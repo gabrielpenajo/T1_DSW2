@@ -23,17 +23,40 @@
 				<span class="oi oi-plus" title="Cadastro" aria-hidden="true"></span> 
 				<span th:text="#{pacote.cadastrar.label}"></span>
 			</a>
-			<a class="btn btn-primary btn-md" sec:authorize="hasRole('ROLE_AGENCIA')"
-			th:if="${param.validos == null || param.validos[0] == 'false'}" th:href="@{/pacotes/listar?validos=true}" role="button"> 
-				<span class="oi oi-plus" title="Filtrar" aria-hidden="true"></span> 
-				<span th:text="#{pacote.filtrarValidos.label}"></span>
-			</a>
-			<a class="btn btn-primary btn-md" sec:authorize="hasRole('ROLE_AGENCIA')"
-			th:if="${param.validos != null && param.validos[0] == 'true'}" th:href="@{/pacotes/listar?validos=false}" role="button"> 
-				<span class="oi oi-plus" title="Filtrar" aria-hidden="true"></span> 
-				<span th:text="#{pacote.filtrarTodos.label}"></span>
-			</a>
 		</nav>
+		<form
+		th:action="@{/pacotes/listar}"
+		method="GET">
+			<div class="form-column">
+
+				<div class="form-check" style="padding-left: 2.5rem;">
+					<input type="checkbox" id="validos" class="form-check-input" name="validos">
+					<label class="form-input-label" th:text="#{pacote.validos.label}" for="validos"></label>
+				</div>
+				<div class="input-group col-md-6">
+					<label th:text="#{pacote.filtrarDestino.label}" class="input-group-text" for="destino"></label> 
+					<input type="text" class="form-control" id="destino" autofocus="autofocus" name="destino"/>
+				</div>
+				<div class="input-group col-md-6">
+					<label th:text="#{pacote.agencia.label}" class="input-group-text" for="destino"></label> 
+                    <select id="agencia" class="form-control" name="agencia">
+                        <option value="">Selecione</option>
+                        <option th:each="agencia : ${agencias}" th:value="${agencia.id}"
+                                th:text="${agencia.nome}"></option>
+                    </select>
+				</div>
+
+				<div class="input-group col-md-6">
+					<label th:text="#{pacote.dataPartida.label}" for="data" class="input-group-text"></label>
+                    <input type="date" class="form-control" id="data" placeholder="" name="data"/>
+				</div>
+				
+				<div class="form-group col-md-6">
+					<button type="submit" th:text="#{button.filtrar.label}"
+					class="btn btn-primary btn-sm"></button>
+				</div>
+			</div>
+		</form>
 
 		<div class="container" id="listagem">
 
