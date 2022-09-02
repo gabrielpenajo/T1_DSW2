@@ -43,6 +43,7 @@
 				<table class="table table-striped table-hover table-sm">
 					<thead>
 						<tr>
+							<th th:text="#{pacote.imagens.label}"></th>
 							<th>#</th>
 							<th th:text="#{pacote.destino.label}"></th>
 							<th th:text="#{pacote.agencia.label}"></th>
@@ -53,6 +54,11 @@
 					</thead>
 					<tbody>						
 						<tr th:each="pacote : ${pacotes}">
+							<td th:if="${imagens.get(pacote.id) != null}">
+								<img th:each="imagem : ${imagens.get(pacote.id)}"
+									 th:src="${imagem}" style="max-width: 100px; max-height: 100px;">
+								<span th:text="${imagem}"></span>
+							</td>
 							<td th:text="${pacote.id}"></td>
 							<td th:text="${pacote.getDestino()}"></td>
 							<td th:text="${pacote.agencia.nome}"></td>

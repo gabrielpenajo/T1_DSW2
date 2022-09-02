@@ -1,6 +1,8 @@
 package br.ufscar.dc.dsw.service.impl;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -133,6 +135,20 @@ public class PacoteService implements IPacoteService {
 
         return pacotes;
     }
+
+	@Override
+	public List<String> buscarImagens(String paths) {
+		
+        String[] imagens;
+        List<String> listImagens = new ArrayList<>();
+        if (paths != null && paths.split("\\|").length > 0) {
+            imagens = paths.split("\\|");
+
+            listImagens = Arrays.asList(imagens);
+        }
+
+		return listImagens;
+	}
 
 
 }

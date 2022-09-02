@@ -82,8 +82,19 @@ public class Proposta extends AbstractEntity<Long> {
 
     @Override
     public String toString() {
-        return "Proposta [cliente=" + cliente + ", dataProposta=" + dataProposta + ", pacote=" + pacote
+        return "Proposta [cliente=" + cliente.getId() + ", dataProposta=" + dataProposta + ", pacote=" + pacote.getId()
                 + ", statusProposta=" + statusProposta + ", valor=" + valor + "]";
     }
+
+    public String getDestino() {
+        return this.pacote.getDestino();
+    }
     
+    public Agencia getAgencia() {
+        return this.pacote.getAgencia();
+    }
+
+    public Date getDataPartida() {
+        return this.pacote.getDataPartida();
+    }
 }

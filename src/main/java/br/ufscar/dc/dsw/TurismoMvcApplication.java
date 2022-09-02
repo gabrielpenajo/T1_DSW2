@@ -72,6 +72,7 @@ public class TurismoMvcApplication {
 			p1.setDataPartida(dataPartida);
 			p1.setDuracaoDias((long) 2);
 			p1.setValor(BigDecimal.valueOf(54.9));
+			p1.setPictures("1.jpg|2.jpg|3.jpg|4.jpg|5.jpg|6.jpg|7.jpeg|8.png|9.jpg|10.jpg");
 			pacoteDAO.save(p1);
 
 			Proposta prop1 = new Proposta();

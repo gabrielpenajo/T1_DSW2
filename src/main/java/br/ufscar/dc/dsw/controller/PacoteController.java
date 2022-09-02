@@ -1,12 +1,17 @@
 package br.ufscar.dc.dsw.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,8 +19,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.ufscar.dc.dsw.Utils.FileUploadUtil;
 import br.ufscar.dc.dsw.domain.Agencia;
 import br.ufscar.dc.dsw.domain.Pacote;
 import br.ufscar.dc.dsw.service.spec.IAgenciaService;
@@ -50,7 +57,7 @@ public class PacoteController {
 	}
 
 	@PostMapping("/salvar")
-	public String salvar(@Valid Pacote pacote, BindingResult result, RedirectAttributes attr) {
+	public String salvar(@Valid Pacote pacote, BindingResult result, RedirectAttributes attr, @RequestParam("image") MultipartFile file, ModelMap model) throws IOException {
 
 		if (result.hasErrors()) {
 			return "pacote/cadastro";
@@ -58,6 +65,23 @@ public class PacoteController {
 
 		pacoteService.salvar(pacote);
 		attr.addFlashAttribute("sucess", "pacote.create.sucess");
+		return savePacoteFoto(pacote, file, attr, model);
+	}
+
+	public String savePacoteFoto(Pacote pacote, @RequestParam("image") MultipartFile multipartFile, RedirectAttributes attr, ModelMap model) throws IOException {
+
+		if (pacoteService.buscarImagens(pacote.getPictures()).size() > 10) {
+			model.addAttribute("errorFoto", "proposta.fotos.failed");
+			return "pacote/cadastro";
+		}
+
+		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+		pacote.setPictures(pacoteService.buscarPorId(pacote.getId()).getPictures() + fileName);
+
+		String uploadDir = "pacoteFotos/" + pacote.getId();
+
+		FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+
 		return "redirect:/pacotes/listar";
 	}
 
@@ -68,15 +92,17 @@ public class PacoteController {
 	}
 
 	@PostMapping("/editar")
-	public String editar(@Valid Pacote pacote, BindingResult result, RedirectAttributes attr) {
+	public String editar(@Valid Pacote pacote, BindingResult result, RedirectAttributes attr,@RequestParam("image") MultipartFile file, ModelMap model) throws IOException {
 
 		if (result.hasErrors()) {
 			return "pacote/cadastro";
 		}
 
+		String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+		pacote.setPictures(pacoteService.buscarPorId(pacote.getId()).getPictures() + fileName);
 		pacoteService.salvar(pacote);
 		attr.addFlashAttribute("sucess", "pacote.edit.sucess");
-		return "redirect:/pacotes/listar";
+		return savePacoteFoto(pacote, file, attr, model);
 	}
 
 	@GetMapping("/excluir/{id}")
@@ -89,5 +115,27 @@ public class PacoteController {
 	@ModelAttribute("agencias")
 	public List<Agencia> listaEditoras() {
 		return agenciaService.buscarTodos();
+	}
+
+	@ModelAttribute("imagens")
+	public Map<Long, List<String>> listaImagens() {
+		Map<Long, List<String>> imagens = new HashMap<>();
+
+		List<Pacote> pacotes = pacoteService.buscarTodos();
+
+		if (!pacotes.isEmpty())
+			for (Pacote pacote : pacotes) {
+				List<String> paths = new ArrayList<>();
+
+				List<String> pathsImagens = pacoteService.buscarImagens(pacote.getPictures());
+				if (!pathsImagens.isEmpty()) {
+					for (String path : pathsImagens) {
+						paths.add("/pacoteFotos/" + pacote.getId() + "/" + path);
+					}
+				}
+				imagens.put(pacote.getId(), paths);
+			}
+
+		return imagens;
 	}
 }

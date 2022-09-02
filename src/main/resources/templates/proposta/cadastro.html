@@ -46,8 +46,8 @@
 										<input type="radio" th:id="${pacote.id}" name="pacote" th:value="${pacote.id}" th:field="*{pacote}" required>
 									</td>
 									<td th:text="${pacote.getDestino()}"></td>
-									<td th:text="${pacote.agencia.nome}"></td>
-									<td th:text="${pacote.dataPartida}"></td>
+									<td th:text="${pacote.getAgencia().nome}"></td>
+									<td th:text="${pacote.getDataPartida()}"></td>
 									<td th:text="|R$ ${#numbers.formatDecimal(pacote.valor,2,2,'COMMA')}|"></td>
 								</tr>
 							</tbody>
@@ -61,6 +61,7 @@
 				
 				<input type="hidden" th:field="*{cliente}" id="cliente">
 				<input type="hidden" th:field="*{dataProposta}" id="dataProposta">
+				<input type="hidden" th:field="*{valor}" id="valor">
 
 				<button type="submit" th:text="#{button.salvar.label}"
 					class="btn btn-primary btn-sm"></button>

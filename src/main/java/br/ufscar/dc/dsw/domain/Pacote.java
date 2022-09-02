@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.domain;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -60,6 +62,25 @@ public class Pacote extends AbstractEntity<Long> {
 
     @OneToMany(mappedBy = "pacote")
     private List<Proposta> propostas;
+
+    @Column(nullable = true)
+    private String pictures;
+
+    public void setPictures(String _pictures) {
+        if (this.pictures == null) {
+            System.out.println("\n\n\n\n\nUWU: " + this.pictures + "\n");
+            this.pictures = _pictures + "|";
+            System.out.println("OWO: " + this.pictures + "\n\n\n\n\n\n\n");
+        } else {
+            System.out.println("\n\n\n\n\nOLD PICTURES: " + this.pictures + "\n");
+            this.pictures += _pictures + "|";
+            System.out.println("NEW PICTURES: " + this.pictures + "\n\n\n\n\n\n\n");
+        }
+    }
+
+    public String getPictures() {
+        return pictures;
+    }
 
     public Agencia getAgencia() {
         return agencia;
