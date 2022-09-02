@@ -67,8 +67,8 @@
 
 					<div class="form-group col-md-6">
 						<label th:text="#{usuario.password.label}" for="senha"></label> 
-						<input type="text" class="form-control" id="senha" autofocus="autofocus"
-							th:field="*{senha}" placeholder="*****"
+						<input type="password" class="form-control" id="senha" autofocus="autofocus"
+							th:field="*{senha}"
 							th:classappend="${#fields.hasErrors('senha')} ? is-invalid" />
 							
 						<div class="invalid-feedback">

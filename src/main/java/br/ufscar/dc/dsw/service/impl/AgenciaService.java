@@ -18,71 +18,73 @@ import br.ufscar.dc.dsw.service.spec.IAgenciaService;
 @Transactional(readOnly = false)
 public class AgenciaService implements IAgenciaService {
 
-	@Autowired
-	IAgenciaDAO dao;
+    @Autowired
+    IAgenciaDAO dao;
 
-	@Autowired
-	IPacoteDAO daoPacote;
+    @Autowired
+    IPacoteDAO daoPacote;
 
-	@Autowired
-	IPropostaDAO daoProposta;
+    @Autowired
+    IPropostaDAO daoProposta;
 
-	public void salvar(Agencia agencia) {
+    public void salvar(Agencia agencia) {
 
-		List<Pacote> pacotes = agencia.getPacotes();
-		if (pacotes != null ) {
-			for(Pacote pacote: pacotes) {
-				pacote.setAgencia(agencia);
-				List<Proposta> propostas = pacote.getPropostas();
-				for(Proposta proposta: propostas) {
-					proposta.setPacote(pacote);
-					daoProposta.save(proposta);
-				}
-				daoPacote.save(pacote);
-			}
-		}
+        List<Pacote> pacotes = agencia.getPacotes();
+        if (pacotes != null) {
+            for (Pacote pacote : pacotes) {
+                pacote.setAgencia(agencia);
+                List<Proposta> propostas = pacote.getPropostas();
+                for (Proposta proposta : propostas) {
+                    proposta.setPacote(pacote);
+                    daoProposta.save(proposta);
+                }
+                daoPacote.save(pacote);
+            }
+        }
 
-		dao.save(agencia);
-	}
+        dao.save(agencia);
+    }
 
-	public void excluir(Long id) {
-		Agencia agencia = this.buscarPorId(id);
-		List<Pacote> pacotes = agencia.getPacotes();
-		if (pacotes != null) {
-			for(Pacote pacote: pacotes) {
-				List<Proposta> propostas = pacote.getPropostas();
-				for(Proposta proposta: propostas)
-					daoProposta.deleteById(proposta.getId());
-				daoPacote.deleteById(pacote.getId());	
-			}
-		}
+    public void excluir(Long id) {
+        Agencia agencia = this.buscarPorId(id);
+        List<Pacote> pacotes = agencia.getPacotes();
+        if (pacotes != null) {
+            for (Pacote pacote : pacotes) {
+                List<Proposta> propostas = pacote.getPropostas();
+                if (propostas != null) {
+                    for (Proposta proposta : propostas)
+                        daoProposta.deleteById(proposta.getId());
+                }
+                daoPacote.deleteById(pacote.getId());
+            }
+        }
 
-		dao.deleteById(id);
-	}
+        dao.deleteById(id);
+    }
 
-	@Transactional(readOnly = true)
-	public Agencia buscarPorId(Long id) {
-		return dao.findById(id.longValue());
-	}
+    @Transactional(readOnly = true)
+    public Agencia buscarPorId(Long id) {
+        return dao.findById(id.longValue());
+    }
 
-	@Transactional(readOnly = true)
-	public List<Agencia> buscarTodos() {
-		return dao.findAll();
-	}
+    @Transactional(readOnly = true)
+    public List<Agencia> buscarTodos() {
+        return dao.findAll();
+    }
 
-	@Transactional(readOnly = true)
-	public boolean agenciaTemPacotes(Long id) {
-		return !dao.findById(id.longValue()).getPacotes().isEmpty(); 
-	}
+    @Transactional(readOnly = true)
+    public boolean agenciaTemPacotes(Long id) {
+        return !dao.findById(id.longValue()).getPacotes().isEmpty();
+    }
 
-	@Override
-	public Agencia buscarPorCNPJ(String CNPJ) {
-		return dao.findByCNPJ(CNPJ);
-	}
+    @Override
+    public Agencia buscarPorCNPJ(String CNPJ) {
+        return dao.findByCNPJ(CNPJ);
+    }
 
-	@Override
-	public Agencia buscarPorEmail(String email) {
-		return dao.findByEmail(email);
-	}
-	
+    @Override
+    public Agencia buscarPorEmail(String email) {
+        return dao.findByEmail(email);
+    }
+
 }

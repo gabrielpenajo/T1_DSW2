@@ -1,6 +1,7 @@
 package br.ufscar.dc.dsw.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,7 +69,7 @@ public class UsuarioService implements IUsuarioService {
 
 	@Transactional(readOnly = true)
 	public List<Usuario> buscarTodos() {
-		return dao.findAll();
+		return dao.findAll().stream().filter(x -> !x.getPapel().equals("AGENCIA")).collect(Collectors.toList());
 	}
 
 	@Override
