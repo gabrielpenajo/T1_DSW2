@@ -30,7 +30,7 @@ public class Usuario {
     @Column(nullable = false, length = 256)
     private String nome;
 
-	@UniqueEmail
+	@UniqueEmail(message = "Unique.usuario.Email")
 	@NotBlank(message = "{NotBlank.usuario.email}")
 	@Size(max = 256)
     @Column(nullable = false, length = 256, unique = true)
