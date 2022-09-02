@@ -1,5 +1,6 @@
 package br.ufscar.dc.dsw.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.core.io.FileSystemResource;
 
 import br.ufscar.dc.dsw.Utils.FileUploadUtil;
 import br.ufscar.dc.dsw.domain.Agencia;
@@ -104,7 +106,7 @@ public class PacoteController {
 			
 			if (pacoteService.buscarPorId(pacote.getId()).getPictures().equals(fileName + "|"))
 				pacoteService.salvar(pacote);
-			String uploadDir = "pacoteFotos/" + pacote.getId();
+			String uploadDir = "/image/pacoteFotos/" + pacote.getId();
 
 			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
 		}
@@ -156,7 +158,7 @@ public class PacoteController {
 				List<String> pathsImagens = pacoteService.buscarImagens(pacote.getPictures());
 				if (!pathsImagens.isEmpty()) {
 					for (String path : pathsImagens) {
-						paths.add("/pacoteFotos/" + pacote.getId() + "/" + path);
+						paths.add("/image" + File.separator + "pacoteFotos"+ File.separator + pacote.getId() + File.separator + path);
 					}
 				}
 				imagens.put(pacote.getId(), paths);
