@@ -47,7 +47,7 @@ public class PropostaController {
 	@GetMapping("/cadastrar")
 	public String cadastrar(ModelMap model, Proposta proposta) {
 		
-		model.addAttribute("pacotes", service.buscarTodosPorCliente_Id(this.getUsuario().getId()));
+		model.addAttribute("pacotes", pacoteService.buscarTodosValidos());
 
 		return "proposta/cadastro";
 	}
@@ -89,6 +89,7 @@ public class PropostaController {
 		Date data = formato.parse(dataString);
 
 		proposta.setDataProposta(data);
+		proposta.setStatusProposta(1);
 		service.salvar(proposta);
 		attr.addFlashAttribute("sucess", "proposta.create.sucess");
 		return "redirect:/propostas/listar";
@@ -96,7 +97,15 @@ public class PropostaController {
 	
 	@GetMapping("/excluir/{id}")
 	public String excluir(@PathVariable("id") Long id, RedirectAttributes attr) {
-		pacoteService.excluir(id);
+		Proposta proposta = service.buscarPorId(id);
+
+		if (!proposta.isPropostaRemovable()) {
+			return "redirect:/propostas/listar";
+		}
+
+		proposta.setStatusProposta(0);
+		service.salvar(proposta);
+
 		attr.addFlashAttribute("sucess", "proposta.delete.sucess");
 		return "redirect:/propostas/listar";
 	}

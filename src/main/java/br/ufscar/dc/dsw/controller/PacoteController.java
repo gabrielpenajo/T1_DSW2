@@ -76,12 +76,13 @@ public class PacoteController {
 		}
 
 		String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-		pacote.setPictures(pacoteService.buscarPorId(pacote.getId()).getPictures() + fileName);
+		if (fileName != null && fileName.length() > 0) {
+			pacote.setPictures(pacoteService.buscarPorId(pacote.getId()).getPictures() + fileName);
 
-		String uploadDir = "pacoteFotos/" + pacote.getId();
+			String uploadDir = "pacoteFotos/" + pacote.getId();
 
-		FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-
+			FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+		}
 		return "redirect:/pacotes/listar";
 	}
 

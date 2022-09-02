@@ -39,6 +39,7 @@
 							<th th:text="#{pacote.dataPartida.label}"></th>
 							<th th:text="#{proposta.valor.label}"></th>
 							<th th:text="#{proposta.status.label}"></th>
+							<th th:text="#{proposta.excluir.label}"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -48,7 +49,14 @@
 							<td th:text="${proposta.pacote.agencia.nome}"></td>
 							<td th:text="${proposta.pacote.dataPartida}"></td>
 							<td th:text="|R$ ${#numbers.formatDecimal(proposta.valor,2,2,'COMMA')}|"></td>
-							<th th:text="#{proposta.statusProposta == 1} ? 'Ativo' : 'Cancelado'"></th>
+							<th th:text="${proposta.statusProposta == 1} ? 'Ativo' : 'Cancelado'"></th>
+							<td>
+								<button th:id="${#strings.concat('btn_propostas/excluir/',proposta.id)}" 
+										type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal"
+										th:if="${proposta.statusProposta == 1}" th:disabled="${!proposta.isPropostaRemovable()}">
+									<span class="oi oi-circle-x" th:title="#{link.excluir.label}" aria-hidden="true"></span>
+								</button>
+							</td>
 						</tr>
 					</tbody>
 				</table>
