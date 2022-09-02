@@ -33,12 +33,9 @@
                 <div class="form-group col-md-6">
                     <label th:text="#{pacote.agencia.label}" for="agencia"></label>
                     <select id="agencia" class="form-control" th:field="*{agencia}"
-                            th:classappend="${#fields.hasErrors('agencia')} ? is-invalid">
-                        <option value="">Selecione</option>
-                        <option th:each="agencia : ${agencias}" th:value="${agencia.id}"
-                                th:text="${agencia.nome}"></option>
+                            th:classappend="${#fields.hasErrors('agencia')} ? is-invalid" readonly="true">
+                        <option th:value="${agencia.id}" th:text="${agencia.nome}" ></option>
                     </select>
-
                     <div class="invalid-feedback">
                         <span th:errors="*{agencia}"></span>
                     </div>

@@ -38,10 +38,10 @@
 
 					<div class="form-group col-md-6">
 						<label th:text="#{usuario.password.label}" for="senha"></label> 
-						<input type="text" class="form-control" id="senha"
+						<input type="password" class="form-control" id="senha"
 							th:placeholder="#{usuario.password.label}" autofocus="autofocus"
 							th:field="*{senha}"
-							th:classappend="${#fields.hasErrors('senha')} ? is-invalid" th:readonly="${cliente.id != null}"/>
+							th:classappend="${#fields.hasErrors('senha')} ? is-invalid"/>
 							
 						<div class="invalid-feedback">
 							<span th:errors="*{senha}"></span>
@@ -64,7 +64,7 @@
 						<input type="text" class="form-control" id="CPF" th:field="*{CPF}"
 							autofocus="autofocus" placeholder="___.___.___-__"
 							th:classappend="${#fields.hasErrors('CPF')} ? is-invalid" 
-							data-mask="000.000.000-00" data-mask-reverse="true" />
+							data-mask="000.000.000-00" data-mask-reverse="true" th:readonly="${cliente.id != null}"/>
 							
 						<div class="invalid-feedback">
 							<span th:errors="*{CPF}"></span>

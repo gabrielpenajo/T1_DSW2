@@ -142,9 +142,10 @@ public class PacoteController {
 		return "redirect:/pacotes/listar";
 	}
 
-	@ModelAttribute("agencias")
-	public List<Agencia> listaEditoras() {
-		return agenciaService.buscarTodos();
+	@ModelAttribute("agencia")
+	public Agencia getAgencia() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		return agenciaService.buscarPorEmail(authentication.getName());
 	}
 
 	@ModelAttribute("imagens")
