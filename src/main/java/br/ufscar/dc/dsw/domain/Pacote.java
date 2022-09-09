@@ -14,6 +14,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings("serial")
@@ -24,6 +26,7 @@ public class Pacote extends AbstractEntity<Long> {
     @NotNull(message = "{NotNull.pacote.agencia}")
 	@ManyToOne
 	@JoinColumn(name = "agencia_id")
+    @JsonManagedReference
 	private Agencia agencia;
 
     @NotBlank(message = "{NotBlank.pacote.cidade}")
@@ -59,6 +62,7 @@ public class Pacote extends AbstractEntity<Long> {
     private String descricao;
 
     @OneToMany(mappedBy = "pacote")
+    @JsonBackReference
     private List<Proposta> propostas;
 
     @Column(nullable = true)

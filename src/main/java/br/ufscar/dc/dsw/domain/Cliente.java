@@ -10,6 +10,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import br.ufscar.dc.dsw.validation.UniqueCPF;
@@ -38,6 +39,7 @@ public class Cliente extends Usuario {
 	private String telefone;
 
     @OneToMany(mappedBy = "cliente")
+    @JsonManagedReference
 	private List<Proposta> propostas;
 
     public String getCPF() {

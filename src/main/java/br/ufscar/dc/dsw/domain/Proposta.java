@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @SuppressWarnings("serial")
@@ -22,11 +24,13 @@ public class Proposta extends AbstractEntity<Long> {
     @NotNull(message = "{NotNull.proposta.usuario}")
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
+    @JsonBackReference
 	private Cliente cliente;
 
     @NotNull(message = "{NotNull.proposta.pacote}")
     @ManyToOne
     @JoinColumn(name = "pacote_id")
+    @JsonManagedReference
     private Pacote pacote;
 
     @NotNull(message = "{NotNull.proposta.dataProposta}")
