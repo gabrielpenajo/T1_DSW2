@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "Cliente")
+@Table(name = "FileDB")
 public class FileEntity extends AbstractEntity<Long> {
 
     @Column(nullable = false, length = 100)
