@@ -1,8 +1,6 @@
 package br.ufscar.dc.dsw.validation;
 
-import br.ufscar.dc.dsw.dao.IClienteDAO;
 import br.ufscar.dc.dsw.dao.IUsuarioDAO;
-import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

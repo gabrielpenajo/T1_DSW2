@@ -1,6 +1,5 @@
 package br.ufscar.dc.dsw.domain;
 
-import br.ufscar.dc.dsw.validation.UniqueCPF;
 import br.ufscar.dc.dsw.validation.UniqueEmail;
 
 import javax.persistence.Column;

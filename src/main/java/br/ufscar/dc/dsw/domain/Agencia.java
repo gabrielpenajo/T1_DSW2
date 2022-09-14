@@ -12,7 +12,6 @@ import javax.validation.constraints.Size;
 
 import br.ufscar.dc.dsw.validation.UniqueCNPJ;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @SuppressWarnings("serial")
 @Entity
