@@ -1,18 +1,26 @@
 package br.ufscar.dc.dsw.controller.rest;
 
 import br.ufscar.dc.dsw.Utils.RestUtils;
+import br.ufscar.dc.dsw.controller.AgenciaController;
 import br.ufscar.dc.dsw.domain.Agencia;
 import br.ufscar.dc.dsw.domain.Pacote;
+import br.ufscar.dc.dsw.service.spec.IAgenciaService;
 import br.ufscar.dc.dsw.service.spec.IPacoteService;
 
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 @CrossOrigin
@@ -22,7 +30,10 @@ public class PacoteRestController {
     @Autowired
     private IPacoteService pacoteService;
 
-    private void parse(Pacote pacote, JSONObject jsonObject) {
+    @Autowired
+    private AgenciaRestController agenciaController;
+
+    private void parse(Pacote pacote, JSONObject jsonObject) throws ParseException, JsonProcessingException {
         Object id = jsonObject.get("id");
         if(id != null) {
             if (id instanceof Integer) {
@@ -31,17 +42,17 @@ public class PacoteRestController {
                 pacote.setId((Long) id);
             }
         }
+        
+        jsonObject.get("agencia");
 
-        pacote.setAgencia((Agencia) jsonObject.get("agencia"));
         pacote.setCidade((String) jsonObject.get("cidade"));
         pacote.setEstado((String) jsonObject.get("estado"));
         pacote.setPais((String) jsonObject.get("pais"));
         pacote.setDataPartida((Date) jsonObject.get("dataPartida"));
-        pacote.setDuracaoDias((Long) jsonObject.get("duracaoDias"));
+        pacote.setDuracaoDias(((Integer) jsonObject.get("duracaoDias")).longValue());
         pacote.setValor((BigDecimal) jsonObject.get("valor"));
         pacote.setDescricao((String) jsonObject.get("descricao"));
         pacote.setPictures((String) jsonObject.get("pictures"));
-        pacote.setAgencia((Agencia) jsonObject.get("agencia"));
     }
 
     @GetMapping(path="pacotes")
@@ -106,7 +117,7 @@ public class PacoteRestController {
         Pacote pacote = pacoteService.buscarPorId(id);
         if (pacote == null) {
             return ResponseEntity.notFound().build();
-        } else  {
+        } else {
             pacoteService.excluir(id);
             return ResponseEntity.noContent().build();
         }

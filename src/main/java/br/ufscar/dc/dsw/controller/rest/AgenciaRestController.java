@@ -22,7 +22,7 @@ public class AgenciaRestController {
     @Autowired
     private IAgenciaService agenciaService;
 
-    private void parse(Agencia agencia, JSONObject jsonObject)  {
+    public void parse(Agencia agencia, JSONObject jsonObject)  {
         Object id = jsonObject.get("id");
         if (id != null) {
             if (id instanceof Integer) {
