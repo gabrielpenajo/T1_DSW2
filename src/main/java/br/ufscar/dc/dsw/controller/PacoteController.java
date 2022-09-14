@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.core.io.FileSystemResource;
 
 import br.ufscar.dc.dsw.Utils.FileUploadUtil;
 import br.ufscar.dc.dsw.domain.Agencia;
