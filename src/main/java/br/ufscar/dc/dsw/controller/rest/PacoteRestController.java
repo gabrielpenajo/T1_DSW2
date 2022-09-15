@@ -2,8 +2,11 @@ package br.ufscar.dc.dsw.controller.rest;
 
 import br.ufscar.dc.dsw.Utils.RestUtils;
 import br.ufscar.dc.dsw.controller.AgenciaController;
+import br.ufscar.dc.dsw.dao.IAgenciaDAO;
+import br.ufscar.dc.dsw.dao.IPacoteDAO;
 import br.ufscar.dc.dsw.domain.Agencia;
 import br.ufscar.dc.dsw.domain.Pacote;
+import br.ufscar.dc.dsw.service.impl.PacoteService;
 import br.ufscar.dc.dsw.service.spec.IAgenciaService;
 import br.ufscar.dc.dsw.service.spec.IPacoteService;
 
@@ -17,11 +20,14 @@ import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -31,26 +37,34 @@ public class PacoteRestController {
     private IPacoteService pacoteService;
 
     @Autowired
+    IAgenciaDAO agenciaDAO;
+
+    @Autowired
     private AgenciaRestController agenciaController;
 
     private void parse(Pacote pacote, JSONObject jsonObject) throws ParseException, JsonProcessingException {
         Object id = jsonObject.get("id");
-        if(id != null) {
+        if (id != null) {
             if (id instanceof Integer) {
                 pacote.setId(((Integer) id).longValue());
             } else {
                 pacote.setId((Long) id);
             }
         }
-        
-        jsonObject.get("agencia");
-
+        Agencia agencia = agenciaDAO.findById(((Number) jsonObject.get("idAgencia")).longValue());
+        pacote.setAgencia(agencia);
         pacote.setCidade((String) jsonObject.get("cidade"));
         pacote.setEstado((String) jsonObject.get("estado"));
         pacote.setPais((String) jsonObject.get("pais"));
-        pacote.setDataPartida((Date) jsonObject.get("dataPartida"));
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date data = sdf.parse((String) jsonObject.get("dataPartida"));
+            pacote.setDataPartida(data);
+        } catch (Exception e) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "A data deve ter um formato válido");
+        }
         pacote.setDuracaoDias(((Integer) jsonObject.get("duracaoDias")).longValue());
-        pacote.setValor((BigDecimal) jsonObject.get("valor"));
+        pacote.setValor(BigDecimal.valueOf((Double) jsonObject.get("valor")));
         pacote.setDescricao((String) jsonObject.get("descricao"));
         pacote.setPictures((String) jsonObject.get("pictures"));
     }
