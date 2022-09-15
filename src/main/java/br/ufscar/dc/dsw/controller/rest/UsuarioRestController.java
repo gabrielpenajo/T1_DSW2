@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +20,6 @@ public class UsuarioRestController {
 
     @Autowired
     private IClienteService clienteService;
-
 
     private void parse(Cliente cliente, JSONObject jsonObject) {
         Object id = jsonObject.get("id");
@@ -33,7 +34,15 @@ public class UsuarioRestController {
         cliente.setNome((String) jsonObject.get("nome"));
         cliente.setCPF((String) jsonObject.get("cpf"));
         cliente.setSexo((String) jsonObject.get("sexo"));
-        cliente.setNascimento((Date) jsonObject.get("nascimento"));
+
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date data = sdf.parse((String) jsonObject.get("nascimento"));
+            cliente.setNascimento(data);
+        } catch (Exception e) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "A data deve ter um formato válido");
+        }
+
         cliente.setSenha((String) jsonObject.get("senha"));
         cliente.setEmail((String) jsonObject.get("email"));
         cliente.setPapel((String) jsonObject.get("papel"));
