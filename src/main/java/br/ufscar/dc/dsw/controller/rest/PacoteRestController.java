@@ -51,8 +51,7 @@ public class PacoteRestController {
                 pacote.setId((Long) id);
             }
         }
-        Agencia agencia = agenciaDAO.findById(((Number) jsonObject.get("idAgencia")).longValue());
-        pacote.setAgencia(agencia);
+
         pacote.setCidade((String) jsonObject.get("cidade"));
         pacote.setEstado((String) jsonObject.get("estado"));
         pacote.setPais((String) jsonObject.get("pais"));
@@ -87,13 +86,23 @@ public class PacoteRestController {
         return ResponseEntity.ok(pacote);
     }
 
-    @PostMapping(path="pacotes")
+    @GetMapping(path="pacotes/agencias/{id}")
+    public ResponseEntity<List<Pacote>> listaPorAgencia(@PathVariable("id") long id) {
+        final List<Pacote> lista = pacoteService.buscarPorAgencia(agenciaDAO.findById(id));
+        if (lista == null || lista.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(lista);
+    }
+
+    @PostMapping(path="pacotes/agencias/{id}")
     @ResponseBody
-    public ResponseEntity<Pacote> cria(@RequestBody JSONObject jsonObject) {
+    public ResponseEntity<Pacote> cria(@PathVariable("id") long id, @RequestBody JSONObject jsonObject) {
         try{
             if(RestUtils.isJsonValid(jsonObject.toString())) {
                 Pacote pacote = new Pacote();
                 parse(pacote, jsonObject);
+                pacote.setAgencia(agenciaDAO.findById(id));
                 pacoteService.salvar(pacote);
                 return ResponseEntity.ok(pacote);
             } else {
