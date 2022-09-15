@@ -1,17 +1,15 @@
 package br.ufscar.dc.dsw.controller.rest;
 
 import br.ufscar.dc.dsw.Utils.RestUtils;
-import br.ufscar.dc.dsw.controller.AgenciaController;
 import br.ufscar.dc.dsw.dao.IAgenciaDAO;
-import br.ufscar.dc.dsw.dao.IPacoteDAO;
-import br.ufscar.dc.dsw.domain.Agencia;
+import br.ufscar.dc.dsw.domain.Cliente;
 import br.ufscar.dc.dsw.domain.Pacote;
-import br.ufscar.dc.dsw.service.impl.PacoteService;
-import br.ufscar.dc.dsw.service.spec.IAgenciaService;
+import br.ufscar.dc.dsw.domain.Proposta;
+import br.ufscar.dc.dsw.service.spec.IClienteService;
 import br.ufscar.dc.dsw.service.spec.IPacoteService;
+import br.ufscar.dc.dsw.service.spec.IPropostaService;
 
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,15 +17,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.web.client.HttpClientErrorException;
 
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -37,10 +33,13 @@ public class PacoteRestController {
     private IPacoteService pacoteService;
 
     @Autowired
-    IAgenciaDAO agenciaDAO;
+    private IPropostaService propostaService;
 
     @Autowired
-    private AgenciaRestController agenciaController;
+    private IClienteService clienteService;
+
+    @Autowired
+    IAgenciaDAO agenciaDAO;
 
     private void parse(Pacote pacote, JSONObject jsonObject) throws ParseException, JsonProcessingException {
         Object id = jsonObject.get("id");
@@ -108,6 +107,42 @@ public class PacoteRestController {
             } else {
                 return ResponseEntity.badRequest().body(null);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
+        }
+    }
+
+    @GetMapping(path="pacotes/clientes/{id}")
+    @ResponseBody
+    public ResponseEntity<List<Proposta>> compra(@PathVariable("id") long id, @RequestBody JSONObject jsonObject) {
+        try{
+            if(RestUtils.isJsonValid(jsonObject.toString())) {
+                List<Proposta> propostas = propostaService.buscarTodosPorCliente_Id(id);
+
+                if (propostas.isEmpty()) {
+                    return ResponseEntity.notFound().build();
+                }
+                return ResponseEntity.ok(propostas);
+            } else {
+                return ResponseEntity.badRequest().body(null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
+        }
+    }
+
+    @GetMapping(path="pacotes/destinos")
+    public ResponseEntity<List<Pacote>> buscaPorDestino(@RequestParam("nome") String nome) {
+        try{
+            System.out.println(nome + " " + nome.length());
+            List<Pacote> pacotes = pacoteService.buscarPorDestino(nome);
+
+            if (pacotes.isEmpty()) {
+                return ResponseEntity.notFound().build();
+            }
+            return ResponseEntity.ok(pacotes);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);

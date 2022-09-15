@@ -110,8 +110,7 @@ public class PacoteService implements IPacoteService {
     public List<Pacote> buscarPorDestino(String destino) {
 
         List<Pacote> pacotes = this.buscarTodos();
-
-        pacotes = pacotes.stream().filter(x -> x.getCidade() == destino).filter(x -> x.getEstado() == destino).filter(x -> x.getPais() == destino).collect(Collectors.toList());
+        pacotes = pacotes.stream().filter(x -> x.getCidade().equals(destino) || x.getEstado().equals(destino) || x.getPais().equals(destino)).collect(Collectors.toList());
 
         return pacotes;
     }
