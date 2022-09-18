@@ -115,18 +115,14 @@ public class PacoteRestController {
 
     @GetMapping(path="pacotes/clientes/{id}")
     @ResponseBody
-    public ResponseEntity<List<Proposta>> compra(@PathVariable("id") long id, @RequestBody JSONObject jsonObject) {
+    public ResponseEntity<List<Proposta>> compra(@PathVariable("id") long id) {
         try{
-            if(RestUtils.isJsonValid(jsonObject.toString())) {
-                List<Proposta> propostas = propostaService.buscarTodosPorCliente_Id(id);
+            List<Proposta> propostas = propostaService.buscarTodosPorCliente_Id(id);
 
-                if (propostas.isEmpty()) {
-                    return ResponseEntity.notFound().build();
-                }
-                return ResponseEntity.ok(propostas);
-            } else {
-                return ResponseEntity.badRequest().body(null);
+            if (propostas.isEmpty()) {
+                return ResponseEntity.notFound().build();
             }
+            return ResponseEntity.ok(propostas);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(null);
